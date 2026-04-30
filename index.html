@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0036)file:///Users/y/Downloads/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IG Grid Preview</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
+<link href="./index_files/css2" rel="stylesheet">
 <style>
 :root {
   --bg:#f7f5f2; --surface:#ffffff; --border:#e5e0d8; --border2:#cec8be;
@@ -216,7 +216,7 @@ textarea.modal-input { resize:vertical; min-height:60px; }
     <div class="lb-close" onclick="closeLb()">×</div>
     <div class="lb-nav lb-prev" onclick="lbNav(-1)">‹</div>
     <div class="lb-nav lb-next" onclick="lbNav(1)">›</div>
-    <img class="lb-img" id="lb-img" src="" alt="">
+    <img class="lb-img" id="lb-img" src="file:///Users/y/Downloads/index.html" alt="">
     <div class="lb-info">
       <div class="lb-title" id="lb-title"></div>
       <div class="lb-date" id="lb-date"></div>
@@ -233,14 +233,14 @@ textarea.modal-input { resize:vertical; min-height:60px; }
     <div class="modal-field"><label>Bio</label><textarea class="modal-input" id="pm-bio" placeholder="Your bio text…"></textarea></div>
     <div class="modal-field"><label>Link (one URL)</label><input class="modal-input" id="pm-link" placeholder="https://yoursite.com"></div>
     <div class="modal-actions">
-      <button class="modal-btn" onclick="closeModal('profile-modal')">Cancel</button>
+      <button class="modal-btn" onclick="closeModal(&#39;profile-modal&#39;)">Cancel</button>
       <button class="modal-btn primary" onclick="saveProfile()">Save</button>
     </div>
   </div>
 </div>
 
 <!-- ── SETUP ── -->
-<div id="setup-screen" class="screen">
+<div id="setup-screen" class="screen" style="display: flex;">
   <div class="card">
     <div class="logo">grid.</div>
     <div class="sub">Connect your Notion database to preview your Instagram feed, inside Notion.</div>
@@ -286,9 +286,9 @@ textarea.modal-input { resize:vertical; min-height:60px; }
   <header>
     <div class="h-logo">grid.</div>
     <div class="h-tabs">
-      <button class="h-tab on" data-tab="main" onclick="switchTab('main')">Main</button>
-      <button class="h-tab" data-tab="reels" onclick="switchTab('reels')">Reels</button>
-      <button class="h-tab" data-tab="tagged" onclick="switchTab('tagged')">Tagged</button>
+      <button class="h-tab on" data-tab="main" onclick="switchTab(&#39;main&#39;)">Main</button>
+      <button class="h-tab" data-tab="reels" onclick="switchTab(&#39;reels&#39;)">Reels</button>
+      <button class="h-tab" data-tab="tagged" onclick="switchTab(&#39;tagged&#39;)">Tagged</button>
     </div>
     <div class="h-right">
       <span class="dot"></span>
@@ -318,7 +318,7 @@ textarea.modal-input { resize:vertical; min-height:60px; }
         <!-- Profile -->
         <div class="ig-bio-area">
           <div class="ig-bio-top">
-            <div class="ig-av" id="ig-av" onclick="openModal('profile-modal')">
+            <div class="ig-av" id="ig-av" onclick="openModal(&#39;profile-modal&#39;)">
               <span id="ig-av-letter">S</span>
               <div class="ig-av-edit">✎</div>
             </div>
@@ -331,7 +331,7 @@ textarea.modal-input { resize:vertical; min-height:60px; }
               </div>
             </div>
           </div>
-          <div class="ig-bio-text" id="ig-bio" onclick="openModal('profile-modal')"></div>
+          <div class="ig-bio-text" id="ig-bio" onclick="openModal(&#39;profile-modal&#39;)"></div>
           <div class="ig-links" id="ig-links"></div>
         </div>
 
@@ -842,5 +842,6 @@ function fmtDate(d) { return new Date(d).toLocaleDateString('en-GB',{day:'numeri
 function showErr(id,msg) { const e=document.getElementById(id); e.textContent=msg; e.style.display='block'; }
 let _tt; function toast(msg) { const e=document.getElementById('toast'); e.textContent=msg; e.classList.add('on'); clearTimeout(_tt); _tt=setTimeout(()=>e.classList.remove('on'),3200); }
 </script>
-</body>
-</html>
+
+
+</body></html>
