@@ -1,208 +1,232 @@
 <!DOCTYPE html>
-<!-- saved from url=(0036)file:///Users/y/Downloads/index.html -->
+<!-- saved from url=(0038)file:///Users/y/Downloads/index_1.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IG Grid Preview</title>
+<title>IG Grid</title>
 <link href="./index_files/css2" rel="stylesheet">
 <style>
-:root {
-  --bg:#f7f5f2; --surface:#ffffff; --border:#e5e0d8; --border2:#cec8be;
-  --text:#1c1917; --text2:#6b6560; --text3:#a39e98;
-  --accent:#b8956a; --accent2:#8c6840; --green:#5a8a6a; --red:#b85a5a;
-  --overlay:rgba(247,245,242,0.92);
-}
-.dark {
-  --bg:#111010; --surface:#1c1b1a; --border:#2c2b29; --border2:#3c3b38;
-  --text:#f0ede8; --text2:#a09890; --text3:#5a5550;
-  --accent:#c8a882; --accent2:#d4b896; --green:#6aaa7a; --red:#cc6a6a;
-  --overlay:rgba(17,16,16,0.92);
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; font-size:13px; transition:background .2s,color .2s; }
+:root{--bg:#f7f5f2;--sf:#fff;--b1:#e5e0d8;--b2:#cec8be;--tx:#1c1917;--t2:#6b6560;--t3:#a39e98;--ac:#b8956a;--a2:#8c6840;--gn:#5a8a6a;--rd:#b85a5a;}
+.dk{--bg:#111010;--sf:#1c1b1a;--b1:#2c2b29;--b2:#3c3b38;--tx:#f0ede8;--t2:#a09890;--t3:#5a5550;--ac:#c8a882;--a2:#d4b896;--gn:#6aaa7a;--rd:#cc6a6a;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:13px;transition:background .2s,color .2s;}
 
-/* ── SCREENS ── */
-.screen { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px; }
-.card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:36px; width:100%; max-width:460px; box-shadow:0 4px 24px rgba(0,0,0,.07); }
-.logo { font-family:'DM Serif Display',serif; font-style:italic; font-size:26px; color:var(--accent2); margin-bottom:8px; }
-.sub { font-size:12px; color:var(--text3); margin-bottom:26px; line-height:1.7; }
-label.lbl { font-size:11px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--text2); margin-bottom:5px; display:block; }
-.inp, .fsel { width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:4px; font-family:'DM Sans',sans-serif; font-size:12px; color:var(--text); background:var(--bg); outline:none; transition:border-color .15s; }
-.inp { margin-bottom:6px; }
-.inp:focus, .fsel:focus { border-color:var(--accent); background:var(--surface); }
-.hint { font-size:11px; color:var(--text3); margin-bottom:14px; line-height:1.6; }
-.hint a { color:var(--accent2); text-decoration:none; }
-.hint a:hover { text-decoration:underline; }
-.btn-main { width:100%; padding:11px; background:var(--text); color:var(--surface); border:none; border-radius:4px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; cursor:pointer; transition:background .15s; margin-top:8px; }
-.btn-main:hover { background:var(--accent2); }
-.err { background:#fdf2f2; border:1px solid #f0cece; color:var(--red); border-radius:4px; padding:10px 12px; font-size:12px; margin-top:10px; display:none; line-height:1.5; }
-.back { font-size:11px; color:var(--text3); cursor:pointer; margin-bottom:16px; display:inline-flex; align-items:center; gap:4px; }
-.back:hover { color:var(--text2); }
-.card-title { font-size:15px; font-weight:500; margin-bottom:4px; }
-.card-sub { font-size:12px; color:var(--text3); margin-bottom:18px; }
-.db-list { display:flex; flex-direction:column; gap:5px; margin-bottom:18px; max-height:260px; overflow-y:auto; }
-.db-item { display:flex; align-items:center; gap:11px; padding:10px 13px; border:1px solid var(--border); border-radius:4px; cursor:pointer; transition:all .15s; }
-.db-item:hover { border-color:var(--accent); }
-.db-item.sel { border-color:var(--accent2); background:var(--bg); }
-.field-row { margin-bottom:12px; }
+/* ── SETUP SCREENS ── */
+.scr{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+.crd{background:var(--sf);border:1px solid var(--b1);border-radius:8px;padding:32px;width:100%;max-width:480px;box-shadow:0 4px 24px rgba(0,0,0,.07);}
+.logo{font-family:'DM Serif Display',serif;font-style:italic;font-size:24px;color:var(--a2);margin-bottom:6px;}
+.sub{font-size:12px;color:var(--t3);margin-bottom:22px;line-height:1.7;}
+.lbl{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--t2);margin-bottom:5px;display:block;}
+.ipt,.fsl{width:100%;padding:9px 12px;border:1px solid var(--b1);border-radius:4px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--tx);background:var(--bg);outline:none;transition:border-color .15s;}
+.ipt{margin-bottom:5px;}
+.ipt:focus,.fsl:focus{border-color:var(--ac);background:var(--sf);}
+.hint{font-size:11px;color:var(--t3);margin-bottom:12px;line-height:1.6;}
+.hint a{color:var(--a2);text-decoration:none;}
+.hint a:hover{text-decoration:underline;}
+.btn-p{width:100%;padding:10px;background:var(--tx);color:var(--sf);border:none;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:background .15s;margin-top:6px;}
+.btn-p:hover{background:var(--a2);}
+.err{background:#fdf2f2;border:1px solid #f0cece;color:var(--rd);border-radius:4px;padding:9px 12px;font-size:12px;margin-top:10px;display:none;line-height:1.5;}
+.bk{font-size:11px;color:var(--t3);cursor:pointer;margin-bottom:14px;display:inline-flex;align-items:center;gap:3px;}
+.bk:hover{color:var(--t2);}
+.ctitle{font-size:14px;font-weight:500;margin-bottom:3px;}
+.csub{font-size:12px;color:var(--t3);margin-bottom:16px;}
+.db-list{display:flex;flex-direction:column;gap:5px;margin-bottom:16px;max-height:240px;overflow-y:auto;}
+.dbi{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--b1);border-radius:4px;cursor:pointer;transition:all .15s;}
+.dbi:hover{border-color:var(--ac);}
+.dbi.sl{border-color:var(--a2);background:var(--bg);}
+.fr{margin-bottom:11px;}
+.opt-row{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border:1px solid var(--b1);border-radius:4px;margin-bottom:6px;background:var(--bg);}
+.opt-label{font-size:12px;color:var(--tx);}
+.opt-sub{font-size:10px;color:var(--t3);margin-top:1px;}
+.opt-badge{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;}
+.ob-ok{background:#e8f5ec;color:#27500a;}
+.ob-miss{background:#fdf5e8;color:#633806;}
+.ob-btn{font-size:11px;padding:4px 10px;border-radius:3px;border:1px solid var(--b2);background:transparent;color:var(--a2);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .15s;}
+.ob-btn:hover{background:var(--bg);border-color:var(--ac);}
+.ob-btn:disabled{opacity:.4;cursor:default;}
 
 /* ── APP ── */
-#app { display:none; flex-direction:column; min-height:100vh; }
-header { background:var(--surface); border-bottom:1px solid var(--border); padding:0 16px; height:46px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:50; gap:10px; transition:background .2s; }
-.h-logo { font-family:'DM Serif Display',serif; font-style:italic; font-size:15px; color:var(--accent2); flex-shrink:0; }
-.h-tabs { display:flex; align-items:center; gap:3px; flex:1; justify-content:center; }
-.h-tab { padding:4px 12px; border-radius:20px; font-size:11px; font-weight:500; cursor:pointer; border:1px solid transparent; color:var(--text3); background:transparent; transition:all .15s; white-space:nowrap; }
-.h-tab:hover { color:var(--text2); }
-.h-tab.on { background:var(--text); color:var(--surface); }
-.h-right { display:flex; align-items:center; gap:6px; flex-shrink:0; }
-.dot { width:6px; height:6px; border-radius:50%; background:var(--green); display:inline-block; }
-.conn-lbl { font-size:10px; color:var(--text3); max-width:90px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.btn-s { padding:4px 10px; border-radius:3px; font-size:11px; font-weight:500; cursor:pointer; border:1px solid var(--border2); background:transparent; color:var(--text2); font-family:'DM Sans',sans-serif; transition:all .15s; }
-.btn-s:hover { background:var(--bg); color:var(--text); }
-.icon-btn { width:26px; height:26px; border-radius:3px; border:1px solid var(--border2); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:13px; color:var(--text2); transition:all .15s; flex-shrink:0; }
-.icon-btn:hover { background:var(--bg); color:var(--text); }
-.body { display:flex; flex:1; height:calc(100vh - 46px); }
+#app{display:none;flex-direction:column;height:100vh;overflow:hidden;}
+header{background:var(--sf);border-bottom:1px solid var(--b1);padding:0 12px;height:44px;display:flex;align-items:center;gap:8px;flex-shrink:0;transition:background .2s;}
+.h-logo{font-family:'DM Serif Display',serif;font-style:italic;font-size:15px;color:var(--a2);flex-shrink:0;margin-right:4px;}
+.h-div{width:1px;height:16px;background:var(--b1);flex-shrink:0;}
+.h-tabs{display:flex;align-items:center;gap:2px;}
+.h-tab{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid transparent;color:var(--t3);background:transparent;transition:all .15s;font-family:'DM Sans',sans-serif;}
+.h-tab:hover{color:var(--t2);}
+.h-tab.on{background:var(--tx);color:var(--sf);}
+.h-sp{flex:1;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--gn);display:inline-block;flex-shrink:0;}
+.h-btn{padding:4px 9px;border-radius:3px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--b2);background:transparent;color:var(--t2);font-family:'DM Sans',sans-serif;transition:all .15s;white-space:nowrap;}
+.h-btn:hover{background:var(--bg);color:var(--tx);}
+
+/* ── BODY ── */
+.body{display:flex;flex:1;min-height:0;}
 
 /* ── SIDEBAR ── */
-.sidebar { width:236px; min-width:236px; background:var(--surface); border-right:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; transition:background .2s; }
-.sb-head { padding:11px 13px 8px; border-bottom:1px solid var(--border); }
-.sb-title { font-size:10px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--text3); margin-bottom:1px; }
-.sb-count { font-size:11px; color:var(--text2); }
-.post-list { flex:1; overflow-y:auto; padding:5px; }
-.post-list::-webkit-scrollbar { width:3px; }
-.post-list::-webkit-scrollbar-thumb { background:var(--border2); border-radius:2px; }
-.p-row { display:flex; align-items:center; gap:8px; padding:6px 7px; border-radius:4px; cursor:pointer; border:1px solid transparent; margin-bottom:2px; user-select:none; transition:background .1s; }
-.p-row:hover { background:var(--bg); }
-.p-row.active { background:var(--bg); border-color:var(--accent); }
-.p-row.hidden-post { opacity:.4; }
-.p-row.dragging { opacity:.3; }
-.p-row.drag-over { border-color:var(--accent2); }
-.p-num { font-size:10px; font-weight:600; color:var(--text3); width:13px; text-align:center; flex-shrink:0; }
-.p-thumb { width:28px; height:35px; border-radius:2px; background:var(--bg); border:1px solid var(--border); flex-shrink:0; display:flex; align-items:center; justify-content:center; overflow:hidden; color:var(--text3); font-size:10px; }
-.p-thumb img { width:100%; height:100%; object-fit:cover; }
-.p-info { flex:1; min-width:0; }
-.p-name { font-size:11px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:1px; }
-.p-date { font-size:10px; color:var(--text3); }
-.p-handle { color:var(--text3); font-size:12px; cursor:grab; flex-shrink:0; opacity:0; transition:opacity .12s; }
-.p-row:hover .p-handle { opacity:1; }
-.p-eye { font-size:11px; color:var(--text3); flex-shrink:0; opacity:0; cursor:pointer; transition:opacity .1s; }
-.p-row:hover .p-eye { opacity:1; }
-.p-eye.hidden { opacity:1; color:var(--red); }
-.drag-tip { font-size:10px; color:var(--text3); text-align:center; padding:8px 12px; border-top:1px solid var(--border); line-height:1.6; }
+.sb{width:230px;min-width:230px;background:var(--sf);border-right:1px solid var(--b1);display:flex;flex-direction:column;overflow:hidden;transition:background .2s;}
+.sb-hd{padding:10px 12px 8px;border-bottom:1px solid var(--b1);}
+.sb-t{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:1px;}
+.sb-c{font-size:11px;color:var(--t2);}
+.plist{flex:1;overflow-y:auto;padding:4px;}
+.plist::-webkit-scrollbar{width:3px;}
+.plist::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
+.pr{display:flex;align-items:center;gap:7px;padding:5px 6px;border-radius:4px;cursor:pointer;border:1px solid transparent;margin-bottom:2px;user-select:none;transition:background .1s;}
+.pr:hover{background:var(--bg);}
+.pr.active{background:var(--bg);border-color:var(--ac);}
+.pr.hp{opacity:.38;}
+.pr.dragging{opacity:.25;}
+.pr.dov{border-color:var(--a2);}
+.pnum{font-size:10px;font-weight:600;color:var(--t3);width:13px;text-align:center;flex-shrink:0;}
+.pthumb{width:26px;height:33px;border-radius:2px;background:var(--bg);border:1px solid var(--b1);flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;color:var(--t3);font-size:9px;}
+.pthumb img{width:100%;height:100%;object-fit:cover;}
+.pinfo{flex:1;min-width:0;}
+.pname{font-size:11px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:1px;}
+.pdate{font-size:10px;color:var(--t3);}
+.peye{font-size:11px;flex-shrink:0;opacity:0;cursor:pointer;transition:opacity .1s;color:var(--t3);line-height:1;padding:2px;}
+.pr:hover .peye{opacity:1;}
+.peye.vis{opacity:1!important;color:var(--rd);}
+.phdl{color:var(--t3);font-size:11px;cursor:grab;flex-shrink:0;opacity:0;transition:opacity .1s;}
+.pr:hover .phdl{opacity:1;}
+.sb-tip{font-size:10px;color:var(--t3);text-align:center;padding:7px 10px;border-top:1px solid var(--b1);line-height:1.6;}
 
 /* ── GRID AREA ── */
-.grid-area { flex:1; overflow-y:auto; padding:24px; display:flex; flex-direction:column; align-items:center; background:var(--bg); transition:background .2s; }
-.ig-phone { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,.10); transition:all .2s; }
-.ig-phone.w3 { width:316px; }
-.ig-phone.w5 { width:500px; }
+.grid-area{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;align-items:center;background:var(--bg);transition:background .2s;}
+.igp{background:var(--sf);border:1px solid var(--b1);border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.09);transition:width .2s;}
+.igp.w3{width:315px;}
+.igp.w5{width:500px;}
 
-/* ── PROFILE ── */
-.ig-bio-area { padding:14px 14px 10px; border-bottom:1px solid var(--border); }
-.ig-bio-top { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
-.ig-av { width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2)); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display',serif; font-style:italic; font-size:20px; color:#fff; overflow:hidden; cursor:pointer; position:relative; }
-.ig-av img { width:100%; height:100%; object-fit:cover; }
-.ig-av-edit { position:absolute; bottom:0; right:0; width:17px; height:17px; background:rgba(0,0,0,.6); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; color:#fff; opacity:0; transition:opacity .15s; }
-.ig-av:hover .ig-av-edit { opacity:1; }
-.ig-meta { flex:1; }
-.ig-un { font-size:13px; font-weight:700; margin-bottom:3px; }
-.ig-stats { display:flex; gap:14px; }
-.ig-sn { font-size:12px; font-weight:700; display:block; }
-.ig-sl { font-size:9px; color:var(--text3); display:block; }
-.ig-bio-text { font-size:11px; color:var(--text2); line-height:1.5; margin-bottom:5px; min-height:16px; cursor:pointer; border-radius:3px; padding:2px 3px; transition:background .15s; }
-.ig-bio-text:hover { background:var(--bg); }
-.ig-bio-text:empty::before { content:'Add a bio…'; color:var(--text3); }
-.ig-links { display:flex; gap:5px; flex-wrap:wrap; }
-.ig-link-chip { font-size:10px; color:var(--accent2); background:var(--bg); padding:2px 8px; border-radius:3px; border:1px solid var(--border); cursor:pointer; transition:all .15s; }
-.ig-link-chip:hover { border-color:var(--accent); }
-.ig-link-add { border-style:dashed; color:var(--text3); }
+/* Profile */
+.ig-bio{padding:13px 13px 9px;border-bottom:1px solid var(--b1);}
+.ig-bio-top{display:flex;align-items:center;gap:11px;margin-bottom:7px;}
+.ig-av{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--a2));flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-style:italic;font-size:19px;color:#fff;overflow:hidden;cursor:pointer;position:relative;}
+.ig-av img{width:100%;height:100%;object-fit:cover;}
+.ig-av-e{position:absolute;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;font-size:14px;opacity:0;transition:opacity .15s;border-radius:50%;}
+.ig-av:hover .ig-av-e{opacity:1;}
+.ig-meta{flex:1;}
+.ig-un{font-size:13px;font-weight:700;margin-bottom:3px;}
+.ig-stats{display:flex;gap:13px;}
+.ig-sn{font-size:11px;font-weight:700;display:block;}
+.ig-sl{font-size:9px;color:var(--t3);display:block;}
+.ig-biotxt{font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:5px;min-height:14px;cursor:pointer;border-radius:3px;padding:2px 3px;transition:background .15s;}
+.ig-biotxt:hover{background:var(--bg);}
+.ig-biotxt:empty::before{content:'Add a bio…';color:var(--t3);}
+.ig-links{display:flex;gap:4px;flex-wrap:wrap;}
+.ig-chip{font-size:10px;color:var(--a2);background:var(--bg);padding:2px 8px;border-radius:3px;border:1px solid var(--b1);cursor:pointer;transition:all .15s;}
+.ig-chip:hover{border-color:var(--ac);}
+.ig-chip-add{border-style:dashed;color:var(--t3);}
 
-/* ── IG TABS ── */
-.ig-tabs { display:flex; border-bottom:1px solid var(--border); }
-.ig-tab { flex:1; padding:7px; text-align:center; font-size:13px; opacity:.2; cursor:pointer; transition:opacity .15s; border-bottom:1.5px solid transparent; }
-.ig-tab.on { opacity:1; border-bottom-color:var(--text); }
+/* IG inner tabs */
+.ig-tabs{display:flex;border-bottom:1px solid var(--b1);}
+.ig-tab{flex:1;padding:7px;text-align:center;font-size:13px;opacity:.2;cursor:pointer;transition:opacity .15s;border-bottom:1.5px solid transparent;}
+.ig-tab.on{opacity:1;border-bottom-color:var(--tx);}
 
-/* ── GRID ── */
-.ig-grid { display:grid; gap:1.5px; background:var(--border); }
-.ig-grid.cols3 { grid-template-columns:repeat(3,1fr); }
-.ig-grid.cols5 { grid-template-columns:repeat(5,1fr); }
-.ig-cell { aspect-ratio:4/5; position:relative; overflow:hidden; background:var(--bg); cursor:pointer; }
-.ig-cell img { width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; transition:transform .2s; }
-.ig-cell:hover img { transform:scale(1.03); }
-.ig-cell.empty { cursor:default; display:flex; align-items:center; justify-content:center; }
-.ig-cell.empty::after { content:'+'; font-size:14px; color:var(--border2); }
-.ig-cell.dov { outline:2px solid var(--accent); outline-offset:-2px; }
-.cell-ov { position:absolute; inset:0; background:transparent; transition:background .15s; display:flex; flex-direction:column; justify-content:flex-end; padding:6px; pointer-events:none; }
-.ig-cell:hover .cell-ov { background:rgba(0,0,0,.35); }
-.cell-meta { opacity:0; transition:opacity .15s; }
-.ig-cell:hover .cell-meta { opacity:1; }
-.cell-date { font-size:8px; color:rgba(255,255,255,.8); margin-bottom:1px; }
-.cell-title { font-size:9px; color:#fff; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.c-num { position:absolute; top:4px; left:4px; background:rgba(0,0,0,.5); backdrop-filter:blur(3px); color:#fff; font-size:8px; font-weight:700; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .15s; }
-.ig-cell:hover .c-num { opacity:1; }
-.c-fmt { position:absolute; top:4px; right:4px; background:rgba(0,0,0,.5); backdrop-filter:blur(3px); color:#fff; font-size:8px; padding:1px 4px; border-radius:2px; opacity:0; transition:opacity .15s; }
-.ig-cell:hover .c-fmt { opacity:1; }
+/* Grid */
+.ig-grid{display:grid;gap:1.5px;background:var(--b1);}
+.ig-grid.c3{grid-template-columns:repeat(3,1fr);}
+.ig-grid.c5{grid-template-columns:repeat(5,1fr);}
+.igc{aspect-ratio:4/5;position:relative;overflow:hidden;background:var(--bg);cursor:pointer;}
+.igc img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;transition:transform .2s;}
+.igc:hover img{transform:scale(1.04);}
+.igc.empty{cursor:default;display:flex;align-items:center;justify-content:center;}
+.igc.empty::after{content:'+';font-size:14px;color:var(--b2);}
+.igc.dov{outline:2px solid var(--ac);outline-offset:-2px;}
+.cov{position:absolute;inset:0;background:transparent;transition:background .15s;display:flex;flex-direction:column;justify-content:flex-end;padding:5px;pointer-events:none;}
+.igc:hover .cov{background:rgba(0,0,0,.38);}
+.cmeta{opacity:0;transition:opacity .15s;}
+.igc:hover .cmeta{opacity:1;}
+.cdate{font-size:8px;color:rgba(255,255,255,.75);margin-bottom:1px;}
+.ctxt{font-size:9px;color:#fff;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cnum{position:absolute;top:4px;left:4px;background:rgba(0,0,0,.5);backdrop-filter:blur(3px);color:#fff;font-size:8px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;}
+.igc:hover .cnum{opacity:1;}
+.cfmt{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.5);backdrop-filter:blur(3px);color:#fff;font-size:7px;padding:2px 4px;border-radius:2px;opacity:0;transition:opacity .15s;}
+.igc:hover .cfmt{opacity:1;}
 
-/* ── DETAIL ── */
-.detail { width:218px; min-width:218px; background:var(--surface); border-left:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; transition:background .2s; }
-.d-empty { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--text3); font-size:12px; gap:8px; padding:20px; text-align:center; }
-.d-body { flex:1; overflow-y:auto; padding:12px; }
-.d-body::-webkit-scrollbar { width:3px; }
-.d-body::-webkit-scrollbar-thumb { background:var(--border2); }
-.d-img { width:100%; aspect-ratio:4/5; border-radius:4px; border:1px solid var(--border); margin-bottom:10px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--bg); }
-.d-img img { width:100%; height:100%; object-fit:cover; }
-.d-name { font-size:13px; font-weight:600; margin-bottom:2px; word-break:break-word; }
-.d-date { font-size:11px; color:var(--text3); margin-bottom:8px; }
-.d-tag { display:inline-flex; align-items:center; padding:2px 7px; border-radius:20px; font-size:10px; font-weight:500; margin-right:3px; margin-bottom:5px; }
-.tg  { background:#f0ede8; color:#5a5248; } .dark .tg  { background:#2a2520; color:#b0a898; }
-.tgn { background:#e8f5ec; color:#27500a; } .tgb { background:#e8eef5; color:#0c447c; }
-.tgo { background:#fdf0e8; color:#633806; } .tgr { background:#fde8e8; color:#791f1f; }
-.tgp { background:#f0e8fd; color:#3c3489; } .tgy { background:#fdf5e8; color:#412402; }
-.d-sec { font-size:10px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--text3); margin-bottom:4px; margin-top:10px; }
-.d-link { font-size:10px; color:var(--accent2); word-break:break-all; text-decoration:none; display:block; line-height:1.5; }
-.d-link:hover { text-decoration:underline; }
-.d-btn { width:100%; padding:6px; background:var(--bg); border:1px solid var(--border); border-radius:3px; font-size:11px; font-weight:500; color:var(--text2); cursor:pointer; font-family:'DM Sans',sans-serif; margin-top:8px; transition:all .15s; }
-.d-btn:hover { background:var(--border); color:var(--text); }
-.d-btn.hide-btn { color:var(--red); }
-.d-btn.hide-btn:hover { background:#fdf2f2; border-color:#f0cece; }
-.d-btn.show-btn { color:var(--green); }
+/* ── DETAIL PANEL ── */
+.det{width:216px;min-width:216px;background:var(--sf);border-left:1px solid var(--b1);display:flex;flex-direction:column;overflow:hidden;transition:background .2s;}
+.det-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--t3);font-size:12px;gap:8px;padding:20px;text-align:center;}
+.det-body{flex:1;overflow-y:auto;padding:12px;}
+.det-body::-webkit-scrollbar{width:3px;}
+.det-body::-webkit-scrollbar-thumb{background:var(--b2);}
+.det-img{width:100%;aspect-ratio:4/5;border-radius:4px;border:1px solid var(--b1);margin-bottom:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg);}
+.det-img img{width:100%;height:100%;object-fit:cover;}
+.det-name{font-size:13px;font-weight:600;margin-bottom:2px;word-break:break-word;}
+.det-date{font-size:11px;color:var(--t3);margin-bottom:8px;}
+.dtag{display:inline-flex;align-items:center;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:500;margin-right:3px;margin-bottom:5px;}
+.tg{background:#f0ede8;color:#5a5248;} .dk .tg{background:#2a2520;color:#b0a898;}
+.tgn{background:#e8f5ec;color:#27500a;} .tgb{background:#e8eef5;color:#0c447c;}
+.tgo{background:#fdf0e8;color:#633806;} .tgr{background:#fde8e8;color:#791f1f;}
+.tgp{background:#f0e8fd;color:#3c3489;} .tgy{background:#fdf5e8;color:#412402;}
+.det-sec{font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);margin-bottom:4px;margin-top:10px;}
+.det-link{font-size:10px;color:var(--a2);word-break:break-all;text-decoration:none;display:block;line-height:1.5;}
+.det-link:hover{text-decoration:underline;}
+.det-btn{width:100%;padding:6px;background:var(--bg);border:1px solid var(--b1);border-radius:3px;font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:7px;transition:all .15s;color:var(--t2);}
+.det-btn:hover{background:var(--b1);color:var(--tx);}
+.det-btn.hide{color:var(--rd);}
+.det-btn.hide:hover{background:#fdf2f2;border-color:#f0cece;}
+.det-btn.show{color:var(--gn);}
 
 /* ── LIGHTBOX ── */
-#lightbox { position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:200; display:none; align-items:center; justify-content:center; }
-#lightbox.on { display:flex; }
-.lb-wrap { position:relative; max-width:400px; width:88%; }
-.lb-img { width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:4px; display:block; }
-.lb-close { position:absolute; top:-34px; right:0; color:#fff; font-size:24px; cursor:pointer; line-height:1; opacity:.7; }
-.lb-close:hover { opacity:1; }
-.lb-nav { position:absolute; top:50%; transform:translateY(-50%); color:#fff; font-size:20px; cursor:pointer; background:rgba(255,255,255,.15); backdrop-filter:blur(4px); width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:background .15s; }
-.lb-nav:hover { background:rgba(255,255,255,.3); }
-.lb-prev { left:-38px; }
-.lb-next { right:-38px; }
-.lb-info { color:#fff; text-align:center; margin-top:10px; }
-.lb-title { font-size:13px; font-weight:600; }
-.lb-date { font-size:11px; opacity:.5; margin-top:2px; }
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:300;display:none;align-items:center;justify-content:center;}
+#lb.on{display:flex;}
+.lb-w{position:relative;max-width:390px;width:88%;}
+.lb-img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;display:block;}
+.lb-x{position:absolute;top:-32px;right:0;color:#fff;font-size:22px;cursor:pointer;opacity:.7;line-height:1;}
+.lb-x:hover{opacity:1;}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:18px;cursor:pointer;background:rgba(255,255,255,.15);backdrop-filter:blur(4px);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.lb-nav:hover{background:rgba(255,255,255,.3);}
+.lb-prev{left:-36px;} .lb-next{right:-36px;}
+.lb-info{color:#fff;text-align:center;margin-top:9px;}
+.lb-title{font-size:13px;font-weight:600;}
+.lb-date{font-size:11px;opacity:.5;margin-top:2px;}
 
-/* ── EDIT MODALS ── */
-.modal-bg { position:fixed; inset:0; background:var(--overlay); backdrop-filter:blur(4px); z-index:100; display:none; align-items:center; justify-content:center; padding:20px; }
-.modal-bg.on { display:flex; }
-.modal { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:24px; width:100%; max-width:360px; box-shadow:0 8px 40px rgba(0,0,0,.12); }
-.modal-title { font-size:14px; font-weight:500; margin-bottom:16px; }
-.modal-field { margin-bottom:12px; }
-.modal-field label { font-size:11px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--text3); display:block; margin-bottom:4px; }
-.modal-input { width:100%; padding:8px 10px; border:1px solid var(--border); border-radius:4px; font-family:'DM Sans',sans-serif; font-size:12px; color:var(--text); background:var(--bg); outline:none; }
-.modal-input:focus { border-color:var(--accent); }
-textarea.modal-input { resize:vertical; min-height:60px; }
-.modal-actions { display:flex; gap:8px; margin-top:16px; justify-content:flex-end; }
-.modal-btn { padding:7px 16px; border-radius:4px; font-size:12px; font-weight:500; cursor:pointer; font-family:'DM Sans',sans-serif; border:1px solid var(--border2); background:transparent; color:var(--text2); transition:all .15s; }
-.modal-btn:hover { background:var(--bg); }
-.modal-btn.primary { background:var(--text); color:var(--surface); border-color:var(--text); }
-.modal-btn.primary:hover { background:var(--accent2); border-color:var(--accent2); }
+/* ── SETTINGS DRAWER ── */
+#settings-drawer{position:fixed;top:0;right:0;bottom:0;width:300px;background:var(--sf);border-left:1px solid var(--b1);z-index:200;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s ease;box-shadow:-4px 0 24px rgba(0,0,0,.08);}
+#settings-drawer.open{transform:translateX(0);}
+.drw-hd{padding:14px 16px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;}
+.drw-title{font-size:13px;font-weight:500;}
+.drw-x{font-size:18px;cursor:pointer;color:var(--t3);line-height:1;}
+.drw-x:hover{color:var(--tx);}
+.drw-body{flex:1;overflow-y:auto;padding:16px;}
+.drw-body::-webkit-scrollbar{width:3px;}
+.drw-body::-webkit-scrollbar-thumb{background:var(--b2);}
+.drw-sec{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px;margin-top:18px;}
+.drw-sec:first-child{margin-top:0;}
+.drw-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--b1);}
+.drw-row:last-child{border-bottom:none;}
+.drw-rl{font-size:12px;color:var(--tx);}
+.drw-rs{font-size:11px;color:var(--t3);margin-top:1px;}
+.drw-val{font-size:11px;color:var(--t3);font-family:monospace;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.drw-badge{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;}
+.drw-foot{padding:12px 16px;border-top:1px solid var(--b1);display:flex;flex-direction:column;gap:6px;}
+.drw-btn{width:100%;padding:8px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;border:1px solid var(--b2);background:transparent;color:var(--t2);}
+.drw-btn:hover{background:var(--bg);color:var(--tx);}
+.drw-btn.primary{background:var(--tx);color:var(--sf);border-color:var(--tx);}
+.drw-btn.primary:hover{background:var(--a2);border-color:var(--a2);}
+.drw-btn.danger{color:var(--rd);}
+.drw-btn.danger:hover{background:#fdf2f2;border-color:#f0cece;}
 
-/* ── LOADING / TOAST ── */
-#loading { position:fixed; inset:0; background:rgba(0,0,0,.12); backdrop-filter:blur(3px); display:none; align-items:center; justify-content:center; z-index:300; }
-.spin { width:26px; height:26px; border:2px solid var(--border2); border-top-color:var(--accent2); border-radius:50%; animation:sp .7s linear infinite; }
-@keyframes sp { to { transform:rotate(360deg); } }
-#toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(12px); background:var(--text); color:var(--surface); padding:9px 18px; border-radius:4px; font-size:12px; opacity:0; transition:all .25s; z-index:400; pointer-events:none; white-space:nowrap; }
-#toast.on { opacity:1; transform:translateX(-50%) translateY(0); }
+/* Profile modal */
+#prof-modal{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:250;display:none;align-items:center;justify-content:center;padding:20px;}
+#prof-modal.on{display:flex;}
+.modal{background:var(--sf);border:1px solid var(--b1);border-radius:8px;padding:24px;width:100%;max-width:340px;}
+.modal-t{font-size:14px;font-weight:500;margin-bottom:14px;}
+.mf{margin-bottom:11px;}
+.mf label{font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);display:block;margin-bottom:4px;}
+.mi{width:100%;padding:8px 10px;border:1px solid var(--b1);border-radius:4px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--tx);background:var(--bg);outline:none;}
+.mi:focus{border-color:var(--ac);}
+textarea.mi{resize:vertical;min-height:56px;}
+.m-acts{display:flex;gap:7px;margin-top:14px;justify-content:flex-end;}
+.m-btn{padding:6px 14px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid var(--b2);background:transparent;color:var(--t2);transition:all .15s;}
+.m-btn:hover{background:var(--bg);}
+.m-btn.primary{background:var(--tx);color:var(--sf);border-color:var(--tx);}
+.m-btn.primary:hover{background:var(--a2);border-color:var(--a2);}
+
+/* ── TOAST / LOADING ── */
+#loading{position:fixed;inset:0;background:rgba(0,0,0,.1);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;z-index:400;}
+.spin{width:24px;height:24px;border:2px solid var(--b2);border-top-color:var(--a2);border-radius:50%;animation:sp .7s linear infinite;}
+@keyframes sp{to{transform:rotate(360deg);}}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--tx);color:var(--sf);padding:8px 16px;border-radius:4px;font-size:12px;opacity:0;transition:all .22s;z-index:500;pointer-events:none;white-space:nowrap;}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
@@ -211,12 +235,12 @@ textarea.modal-input { resize:vertical; min-height:60px; }
 <div id="toast"></div>
 
 <!-- ── LIGHTBOX ── -->
-<div id="lightbox">
-  <div class="lb-wrap">
-    <div class="lb-close" onclick="closeLb()">×</div>
+<div id="lb">
+  <div class="lb-w">
+    <div class="lb-x" onclick="closeLb()">×</div>
     <div class="lb-nav lb-prev" onclick="lbNav(-1)">‹</div>
     <div class="lb-nav lb-next" onclick="lbNav(1)">›</div>
-    <img class="lb-img" id="lb-img" src="file:///Users/y/Downloads/index.html" alt="">
+    <img class="lb-img" id="lb-img" src="file:///Users/y/Downloads/index_1.html" alt="">
     <div class="lb-info">
       <div class="lb-title" id="lb-title"></div>
       <div class="lb-date" id="lb-date"></div>
@@ -224,103 +248,126 @@ textarea.modal-input { resize:vertical; min-height:60px; }
   </div>
 </div>
 
-<!-- ── PROFILE EDIT MODAL ── -->
-<div class="modal-bg" id="profile-modal">
+<!-- ── PROFILE MODAL ── -->
+<div id="prof-modal">
   <div class="modal">
-    <div class="modal-title">Edit profile</div>
-    <div class="modal-field"><label>Username</label><input class="modal-input" id="pm-username" placeholder="@youraccount"></div>
-    <div class="modal-field"><label>Profile picture URL</label><input class="modal-input" id="pm-avatar" placeholder="https://…"></div>
-    <div class="modal-field"><label>Bio</label><textarea class="modal-input" id="pm-bio" placeholder="Your bio text…"></textarea></div>
-    <div class="modal-field"><label>Link (one URL)</label><input class="modal-input" id="pm-link" placeholder="https://yoursite.com"></div>
-    <div class="modal-actions">
-      <button class="modal-btn" onclick="closeModal(&#39;profile-modal&#39;)">Cancel</button>
-      <button class="modal-btn primary" onclick="saveProfile()">Save</button>
+    <div class="modal-t">Edit profile</div>
+    <div class="mf"><label>Username</label><input class="mi" id="pm-un" placeholder="@youraccount"></div>
+    <div class="mf"><label>Profile picture URL</label><input class="mi" id="pm-av" placeholder="https://…"></div>
+    <div class="mf"><label>Bio</label><textarea class="mi" id="pm-bio"></textarea></div>
+    <div class="mf"><label>Link</label><input class="mi" id="pm-lk" placeholder="https://yoursite.com"></div>
+    <div class="m-acts">
+      <button class="m-btn" onclick="closeModal()">Cancel</button>
+      <button class="m-btn primary" onclick="saveProfile()">Save</button>
     </div>
   </div>
 </div>
 
+<!-- ── SETTINGS DRAWER ── -->
+<div id="settings-drawer">
+  <div class="drw-hd">
+    <div class="drw-title">Settings</div>
+    <div class="drw-x" onclick="closeSettings()">×</div>
+  </div>
+  <div class="drw-body" id="drw-body"></div>
+  <div class="drw-foot">
+    <button class="drw-btn primary" onclick="closeSettings()">Done</button>
+    <button class="drw-btn" onclick="remapFields()">Re-map fields</button>
+    <button class="drw-btn danger" onclick="disconnect()">Disconnect</button>
+  </div>
+</div>
+
 <!-- ── SETUP ── -->
-<div id="setup-screen" class="screen" style="display: flex;">
-  <div class="card">
+<div id="s0" class="scr" style="display: flex;">
+  <div class="crd">
     <div class="logo">grid.</div>
-    <div class="sub">Connect your Notion database to preview your Instagram feed, inside Notion.</div>
+    <div class="sub">Connect your Notion database to preview your Instagram feed inside Notion.</div>
     <label class="lbl">Notion Integration Token</label>
-    <input class="inp" id="tok" type="password" placeholder="secret_xxxxxxxxxxxx" autocomplete="off">
-    <p class="hint">Create one at <a href="https://www.notion.so/my-integrations" target="_blank">notion.so/my-integrations</a> with <strong>Read</strong> + <strong>Update content</strong> access. Then share your database with it.</p>
-    <button class="btn-main" onclick="connect()">Connect →</button>
-    <div class="err" id="err1"></div>
+    <input class="ipt" id="tok" type="password" placeholder="secret_xxxxxxxxxxxx" autocomplete="off">
+    <p class="hint">Create one at <a href="https://www.notion.so/my-integrations" target="_blank">notion.so/my-integrations</a> with <strong>Read</strong> + <strong>Update content</strong> access. Share your database with it.</p>
+    <button class="btn-p" onclick="connect()">Connect →</button>
+    <div class="err" id="e0"></div>
   </div>
 </div>
 
 <!-- ── DB PICKER ── -->
-<div id="db-screen" class="screen" style="display:none">
-  <div class="card">
-    <span class="back" onclick="goSetup()">← Back</span>
-    <div class="card-title">Choose your database</div>
-    <div class="card-sub">Select the Notion database that holds your Instagram posts.</div>
+<div id="s1" class="scr" style="display:none">
+  <div class="crd">
+    <span class="bk" onclick="goS(0)">← Back</span>
+    <div class="ctitle">Choose your database</div>
+    <div class="csub">Select the Notion database holding your Instagram posts.</div>
     <div class="db-list" id="db-list"></div>
-    <button class="btn-main" onclick="pickDb()">Use this database →</button>
-    <div class="err" id="err2"></div>
+    <button class="btn-p" onclick="pickDb()">Use this database →</button>
+    <div class="err" id="e1"></div>
   </div>
 </div>
 
 <!-- ── FIELD MAP ── -->
-<div id="map-screen" class="screen" style="display:none">
-  <div class="card">
-    <span class="back" onclick="goDb()">← Back</span>
-    <div class="card-title">Map your fields</div>
-    <div class="card-sub">The widget auto-detects your fields. Confirm or adjust below.</div>
-    <div class="field-row"><label class="lbl">Cover / image URL field <span style="color:var(--text3)">(required)</span></label><select class="fsel" id="f-img"></select><p class="hint" style="margin-top:5px">Also checks page cover automatically. Priority: this field → page cover.</p></div>
-    <div class="field-row"><label class="lbl">Post title <span style="color:var(--text3)">(required)</span></label><select class="fsel" id="f-title"></select></div>
-    <div class="field-row"><label class="lbl">Publish date <span style="color:var(--text3)">(optional)</span></label><select class="fsel" id="f-date"></select></div>
-    <div class="field-row"><label class="lbl">Status <span style="color:var(--text3)">(optional)</span></label><select class="fsel" id="f-status"></select></div>
-    <div class="field-row"><label class="lbl">Format / type <span style="color:var(--text3)">(optional — used for Reels tab)</span></label><select class="fsel" id="f-format"></select></div>
-    <div class="field-row"><label class="lbl">Grid order <span style="color:var(--text3)">(optional number field)</span></label><select class="fsel" id="f-order"></select><p class="hint" style="margin-top:5px">Add a Number property "Grid Order" to your database to sync drag-and-drop order back to Notion.</p></div>
-    <div class="field-row"><label class="lbl">Hidden from grid <span style="color:var(--text3)">(optional checkbox)</span></label><select class="fsel" id="f-hidden"></select><p class="hint" style="margin-top:5px">Add a Checkbox property "Hide from Grid" to let you exclude posts without deleting them.</p></div>
-    <button class="btn-main" onclick="saveMap()">Build my grid →</button>
+<div id="s2" class="scr" style="display:none">
+  <div class="crd">
+    <span class="bk" onclick="goS(1)">← Back</span>
+    <div class="ctitle">Map your fields</div>
+    <div class="csub">The widget auto-detects fields. Confirm or adjust below.</div>
+
+    <div class="fr"><label class="lbl">Cover / image URL <span style="color:var(--t3)">(required)</span></label>
+    <select class="fsl" id="f-img"></select>
+    <p class="hint" style="margin-top:4px">Priority: this field → page cover image → first image in page body.</p></div>
+
+    <div class="fr"><label class="lbl">Post title <span style="color:var(--t3)">(required)</span></label>
+    <select class="fsl" id="f-title"></select></div>
+
+    <div class="fr"><label class="lbl">Publish date <span style="color:var(--t3)">(optional)</span></label>
+    <select class="fsl" id="f-date"></select></div>
+
+    <div class="fr"><label class="lbl">Status <span style="color:var(--t3)">(optional)</span></label>
+    <select class="fsl" id="f-status"></select></div>
+
+    <div class="fr"><label class="lbl">Format / type <span style="color:var(--t3)">(optional, used for Reels tab)</span></label>
+    <select class="fsl" id="f-format"></select></div>
+
+    <div class="fr">
+      <label class="lbl">Optional properties</label>
+      <div id="opt-props"></div>
+    </div>
+
+    <button class="btn-p" onclick="saveMap()">Build my grid →</button>
   </div>
 </div>
 
 <!-- ── APP ── -->
-<div id="app">
+<div id="app" style="display: none;">
   <header>
     <div class="h-logo">grid.</div>
+    <div class="h-div"></div>
     <div class="h-tabs">
       <button class="h-tab on" data-tab="main" onclick="switchTab(&#39;main&#39;)">Main</button>
       <button class="h-tab" data-tab="reels" onclick="switchTab(&#39;reels&#39;)">Reels</button>
       <button class="h-tab" data-tab="tagged" onclick="switchTab(&#39;tagged&#39;)">Tagged</button>
     </div>
-    <div class="h-right">
-      <span class="dot"></span>
-      <span class="conn-lbl" id="conn-lbl">Connected</span>
-      <button class="btn-s" onclick="toggleCols()" id="col-btn">5-col</button>
-      <button class="btn-s" onclick="refresh()">↺</button>
-      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle dark mode">◑</button>
-      <button class="btn-s" onclick="disconnect()">Disconnect</button>
-    </div>
+    <div class="h-sp"></div>
+    <span class="dot"></span>
+    <button class="h-btn" onclick="toggleCols()" id="col-btn">5-col</button>
+    <button class="h-btn" onclick="toggleTheme()">◑</button>
+    <button class="h-btn" onclick="refresh()">↺</button>
+    <button class="h-btn" onclick="openSettings()">⚙</button>
   </header>
   <div class="body">
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <div class="sb-head">
-        <div class="sb-title">Scheduled posts</div>
-        <div class="sb-count" id="post-count">—</div>
+    <div class="sb">
+      <div class="sb-hd">
+        <div class="sb-t">Scheduled posts</div>
+        <div class="sb-c" id="sb-count">—</div>
       </div>
-      <div class="post-list" id="post-list"></div>
-      <div class="drag-tip">Drag to reorder. Eye icon hides from grid.<br>Changes sync to Notion.</div>
+      <div class="plist" id="plist"></div>
+      <div class="sb-tip">Drag to reorder · Eye to hide · Syncs to Notion</div>
     </div>
 
-    <!-- Grid -->
     <div class="grid-area">
-      <div class="ig-phone w3" id="ig-phone">
-
-        <!-- Profile -->
-        <div class="ig-bio-area">
+      <div class="igp w3" id="igp">
+        <div class="ig-bio">
           <div class="ig-bio-top">
-            <div class="ig-av" id="ig-av" onclick="openModal(&#39;profile-modal&#39;)">
-              <span id="ig-av-letter">S</span>
-              <div class="ig-av-edit">✎</div>
+            <div class="ig-av" id="ig-av" onclick="openModal()">
+              <span id="ig-av-l">S</span>
+              <div class="ig-av-e">✎</div>
             </div>
             <div class="ig-meta">
               <div class="ig-un" id="ig-un">@youraccount</div>
@@ -331,48 +378,31 @@ textarea.modal-input { resize:vertical; min-height:60px; }
               </div>
             </div>
           </div>
-          <div class="ig-bio-text" id="ig-bio" onclick="openModal(&#39;profile-modal&#39;)"></div>
+          <div class="ig-biotxt" id="ig-bio" onclick="openModal()"></div>
           <div class="ig-links" id="ig-links"></div>
         </div>
-
-        <!-- IG Tabs -->
         <div class="ig-tabs">
-          <div class="ig-tab on" data-igtab="grid">⊞</div>
-          <div class="ig-tab" data-igtab="reels">▷</div>
-          <div class="ig-tab" data-igtab="tagged">⊡</div>
+          <div class="ig-tab on">⊞</div>
+          <div class="ig-tab">▷</div>
+          <div class="ig-tab">⊡</div>
         </div>
-
-        <!-- Grid -->
-        <div class="ig-grid cols3" id="ig-grid"></div>
+        <div class="ig-grid c3" id="ig-grid"></div>
       </div>
     </div>
 
-    <!-- Detail -->
-    <div class="detail">
-      <div class="d-empty" id="d-empty">
-        <span style="font-size:24px;opacity:.25">◻</span>
-        Click a post to see details
-      </div>
-      <div class="d-body" id="d-body" style="display:none"></div>
+    <div class="det">
+      <div class="det-empty" id="det-empty"><span style="font-size:22px;opacity:.22">◻</span>Click a post</div>
+      <div class="det-body" id="det-body" style="display:none"></div>
     </div>
-
   </div>
 </div>
 
 <script>
+// ── CORS proxy for Notion API ─────────────────────────────────────────────────
 const PROXY = 'https://corsproxy.io/?url=';
-const KEY   = 'ig_grid_v4';
-
-let S = {
-  token:'', dbId:'', dbName:'', dark:false, cols:3, tab:'main',
-  fields:{ img:'', title:'', date:'', status:'', format:'', order:'', hidden:'' },
-  profile:{ username:'', avatar:'', bio:'', link:'' },
-  posts:[], sel:null, dragFrom:null, lbIdx:null
-};
-let _dbs = [];
 
 async function notion(path, method='GET', body=null) {
-  const target = encodeURIComponent('https://api.notion.com/v1' + path);
+  const url = PROXY + encodeURIComponent('https://api.notion.com/v1' + path);
   const opts = {
     method,
     headers: {
@@ -382,29 +412,38 @@ async function notion(path, method='GET', body=null) {
     }
   };
   if (body) opts.body = JSON.stringify(body);
-  const res = await fetch(PROXY + target, opts);
+  const res = await fetch(url, opts);
   if (!res.ok) {
-    const e = await res.json().catch(() => ({ message: 'HTTP ' + res.status }));
+    const e = await res.json().catch(() => ({}));
     throw new Error(e.message || 'HTTP ' + res.status);
   }
   return res.json();
 }
 
-// ── BOOT ──────────────────────────────────────────────────────────────────────
+// ── State ─────────────────────────────────────────────────────────────────────
+const KEY = 'ig_grid_v5';
+let S = {
+  token:'', dbId:'', dbName:'', dark:false, cols:3, tab:'main',
+  fields:{ img:'', title:'', date:'', status:'', format:'', order:'', hidden:'' },
+  profile:{ username:'', avatar:'', bio:'', link:'' },
+  posts:[], sel:null, dragFrom:null
+};
+let _dbs=[], _schema={}, _lbPosts=[], _lbIdx=0;
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
 window.onload = () => {
   try {
-    const c = JSON.parse(localStorage.getItem(KEY) || '{}');
+    const c = JSON.parse(localStorage.getItem(KEY)||'{}');
     if (c.token && c.dbId) {
       Object.assign(S, c);
       applyTheme();
-      show('app', 'flex');
-      document.getElementById('conn-lbl').textContent = S.dbName || 'Connected';
+      showApp();
       loadPosts();
       renderProfile();
       return;
     }
-  } catch(e) {}
-  show('setup-screen');
+  } catch(e){}
+  goS(0);
 };
 
 function persist() {
@@ -415,428 +454,489 @@ function persist() {
   }));
 }
 
-// ── SCREENS ───────────────────────────────────────────────────────────────────
-function show(id, d='flex') { document.getElementById(id).style.display = d; }
-function hide(id) { document.getElementById(id).style.display = 'none'; }
-function goSetup() { show('setup-screen'); hide('db-screen'); hide('map-screen'); hide('app'); }
-function goDb()    { hide('setup-screen'); show('db-screen'); hide('map-screen'); hide('app'); }
-function goMap()   { hide('setup-screen'); hide('db-screen'); show('map-screen'); hide('app'); }
+// ── Screen routing ────────────────────────────────────────────────────────────
+function goS(n) {
+  [0,1,2].forEach(i => document.getElementById('s'+i).style.display = i===n?'flex':'none');
+  document.getElementById('app').style.display = 'none';
+}
+function showApp() {
+  [0,1,2].forEach(i => document.getElementById('s'+i).style.display='none');
+  document.getElementById('app').style.display = 'flex';
+  document.getElementById('ig-un').textContent = S.profile.username || '@' + (S.dbName||'feed').toLowerCase().replace(/\s+/g,'_');
+}
 
-// ── THEME ─────────────────────────────────────────────────────────────────────
-function toggleTheme() { S.dark = !S.dark; applyTheme(); persist(); }
-function applyTheme() { document.documentElement.classList.toggle('dark', S.dark); }
+// ── Theme ─────────────────────────────────────────────────────────────────────
+function toggleTheme() { S.dark=!S.dark; applyTheme(); persist(); }
+function applyTheme() { document.documentElement.classList.toggle('dk', S.dark); }
 
-// ── COLS ──────────────────────────────────────────────────────────────────────
+// ── Cols ──────────────────────────────────────────────────────────────────────
 function toggleCols() {
-  S.cols = S.cols === 3 ? 5 : 3;
-  const phone = document.getElementById('ig-phone');
-  phone.className = 'ig-phone ' + (S.cols === 3 ? 'w3' : 'w5');
-  document.getElementById('ig-grid').className = 'ig-grid cols' + S.cols;
-  document.getElementById('col-btn').textContent = S.cols === 3 ? '5-col' : '3-col';
+  S.cols = S.cols===3?5:3;
+  document.getElementById('igp').className = 'igp ' + (S.cols===3?'w3':'w5');
+  document.getElementById('ig-grid').className = 'ig-grid '+(S.cols===3?'c3':'c5');
+  document.getElementById('col-btn').textContent = S.cols===3?'5-col':'3-col';
   persist();
 }
 
-// ── CONNECT ───────────────────────────────────────────────────────────────────
+// ── Connect ───────────────────────────────────────────────────────────────────
 async function connect() {
   const tok = document.getElementById('tok').value.trim();
-  if (!tok) return showErr('err1', 'Please enter your integration token.');
+  if (!tok) return showErr('e0','Enter your integration token.');
   S.token = tok;
   loading(true);
   try {
-    const r = await notion('/search', 'POST', { filter:{ value:'database', property:'object' }, page_size:20 });
+    const r = await notion('/search','POST',{filter:{value:'database',property:'object'},page_size:20});
     loading(false);
-    if (!r.results?.length) return showErr('err1', 'No databases found. Share your database with the integration first.');
+    if (!r.results?.length) return showErr('e0','No databases found. Share your database with the integration first.');
     _dbs = r.results;
-    renderDbs();
-    goDb();
-  } catch(e) {
-    loading(false);
-    showErr('err1', 'Connection failed: ' + e.message);
-  }
+    renderDbs(); goS(1);
+  } catch(e) { loading(false); showErr('e0','Connection failed: '+e.message); }
 }
 
 function renderDbs() {
   const el = document.getElementById('db-list');
   el.innerHTML = '';
-  _dbs.forEach((db, i) => {
-    const name = db.title?.[0]?.plain_text || 'Untitled';
-    const icon = db.icon?.emoji || '📋';
+  _dbs.forEach((db,i) => {
+    const name = db.title?.[0]?.plain_text||'Untitled';
+    const icon = db.icon?.emoji||'📋';
     const d = document.createElement('div');
-    d.className = 'db-item';
-    d.dataset.i = i;
-    d.innerHTML = `<span style="font-size:18px">${icon}</span><div><div style="font-size:13px;font-weight:500">${esc(name)}</div><div style="font-size:10px;color:var(--text3);font-family:monospace">${db.id.slice(0,8)}…</div></div>`;
-    d.onclick = () => { document.querySelectorAll('.db-item').forEach(x => x.classList.remove('sel')); d.classList.add('sel'); };
+    d.className='dbi'; d.dataset.i=i;
+    d.innerHTML=`<span style="font-size:17px">${icon}</span><div><div style="font-size:13px;font-weight:500">${esc(name)}</div><div style="font-size:10px;color:var(--t3);font-family:monospace">${db.id.slice(0,8)}…</div></div>`;
+    d.onclick=()=>{document.querySelectorAll('.dbi').forEach(x=>x.classList.remove('sl'));d.classList.add('sl');};
     el.appendChild(d);
   });
-  el.querySelector('.db-item')?.click();
+  el.querySelector('.dbi')?.click();
 }
 
 async function pickDb() {
-  const sel = document.querySelector('.db-item.sel');
-  if (!sel) return showErr('err2', 'Select a database first.');
+  const sel = document.querySelector('.dbi.sl');
+  if (!sel) return showErr('e1','Select a database first.');
   const db = _dbs[+sel.dataset.i];
-  S.dbId = db.id;
-  S.dbName = db.title?.[0]?.plain_text || 'Untitled';
+  S.dbId = db.id; S.dbName = db.title?.[0]?.plain_text||'Untitled';
   loading(true);
   try {
-    const schema = await notion('/databases/' + S.dbId);
+    const schema = await notion('/databases/'+S.dbId);
     loading(false);
-    fillFieldMap(schema.properties);
-    goMap();
-  } catch(e) {
-    loading(false);
-    showErr('err2', 'Could not load database: ' + e.message);
-  }
+    _schema = schema.properties;
+    renderFieldMap(_schema);
+    goS(2);
+  } catch(e) { loading(false); showErr('e1','Could not load database: '+e.message); }
 }
 
-function fillFieldMap(props) {
+// ── Field map ─────────────────────────────────────────────────────────────────
+function renderFieldMap(props) {
   const all = Object.keys(props);
-  const urlF   = all.filter(p => ['url','rich_text','title'].includes(props[p].type));
-  const titF   = all.filter(p => ['title','rich_text'].includes(props[p].type));
-  const datF   = ['(none)', ...all.filter(p => props[p].type === 'date')];
-  const selF   = ['(none)', ...all.filter(p => ['select','status'].includes(props[p].type))];
-  const numF   = ['(none)', ...all.filter(p => props[p].type === 'number')];
-  const chkF   = ['(none)', ...all.filter(p => props[p].type === 'checkbox')];
+  const urlF  = all.filter(p=>['url','rich_text','title','files'].includes(props[p].type));
+  const titF  = all.filter(p=>['title','rich_text'].includes(props[p].type));
+  const datF  = ['(none)',...all.filter(p=>props[p].type==='date')];
+  const selF  = ['(none)',...all.filter(p=>['select','status'].includes(props[p].type))];
 
-  fill('f-img',    urlF,  ['cover','asset','image','url','link','media','photo','canva']);
-  fill('f-title',  titF,  ['name','title']);
-  fill('f-date',   datF,  ['publish','date','schedule','post']);
-  fill('f-status', selF,  ['status']);
-  fill('f-format', selF,  ['format','type','kind','format']);
-  fill('f-order',  numF,  ['order','grid','position','sort']);
-  fill('f-hidden', chkF,  ['hide','hidden','exclude','skip']);
+  fill('f-img',  urlF,  ['cover','asset','image','url','link','media','photo','canva']);
+  fill('f-title',titF,  ['name','title']);
+  fill('f-date', datF,  ['publish','date','schedule','post']);
+  fill('f-status',selF, ['status']);
+  fill('f-format',selF, ['format','type','kind']);
+
+  // Optional props: Grid Order + Hide from Grid
+  const numF  = all.filter(p=>props[p].type==='number');
+  const chkF  = all.filter(p=>props[p].type==='checkbox');
+
+  const hasOrder  = numF.includes('Grid Order');
+  const hasHidden = chkF.includes('Hide from Grid');
+
+  const el = document.getElementById('opt-props');
+  el.innerHTML = `
+    <div class="opt-row">
+      <div><div class="opt-label">Grid Order</div><div class="opt-sub">Number · syncs drag-and-drop order</div></div>
+      ${hasOrder
+        ? `<span class="opt-badge ob-ok">✓ Found</span>`
+        : `<button class="ob-btn" onclick="createProp('number','Grid Order',this)">+ Create</button>`}
+    </div>
+    <div class="opt-row">
+      <div><div class="opt-label">Hide from Grid</div><div class="opt-sub">Checkbox · hides post without deleting</div></div>
+      ${hasHidden
+        ? `<span class="opt-badge ob-ok">✓ Found</span>`
+        : `<button class="ob-btn" onclick="createProp('checkbox','Hide from Grid',this)">+ Create</button>`}
+    </div>`;
+}
+
+async function createProp(type, name, btn) {
+  btn.disabled = true;
+  btn.textContent = 'Creating…';
+  try {
+    const body = { properties:{ [name]: type==='number'?{number:{format:'number'}}:{checkbox:{}} } };
+    await notion('/databases/'+S.dbId, 'PATCH', body);
+    // update schema
+    _schema[name] = { type };
+    btn.closest('.opt-row').querySelector('.opt-label').insertAdjacentHTML('afterend', `<span class="opt-badge ob-ok" style="margin-left:8px">✓ Created</span>`);
+    btn.remove();
+    toast(name + ' created ✓');
+  } catch(e) {
+    btn.disabled=false; btn.textContent='Retry';
+    toast('Could not create: '+e.message);
+  }
 }
 
 function fill(id, arr, hints) {
   const s = document.getElementById(id);
-  s.innerHTML = arr.map(p => `<option value="${p==='(none)'?'':p}">${p}</option>`).join('');
-  const m = arr.find(p => hints.some(h => p.toLowerCase().includes(h)));
-  if (m && m !== '(none)') s.value = m;
+  s.innerHTML = arr.map(p=>`<option value="${p==='(none)'?'':p}">${p}</option>`).join('');
+  const m = arr.find(p=>hints.some(h=>p.toLowerCase().includes(h)));
+  if (m&&m!=='(none)') s.value=m;
 }
 
 function saveMap() {
-  S.fields = {
-    img:    document.getElementById('f-img').value,
-    title:  document.getElementById('f-title').value,
-    date:   document.getElementById('f-date').value,
-    status: document.getElementById('f-status').value,
-    format: document.getElementById('f-format').value,
-    order:  document.getElementById('f-order').value,
-    hidden: document.getElementById('f-hidden').value,
-  };
+  S.fields.img    = document.getElementById('f-img').value;
+  S.fields.title  = document.getElementById('f-title').value;
+  S.fields.date   = document.getElementById('f-date').value;
+  S.fields.status = document.getElementById('f-status').value;
+  S.fields.format = document.getElementById('f-format').value;
+  // auto-assign order + hidden if they exist
+  const all = Object.keys(_schema);
+  S.fields.order  = all.find(p=>p==='Grid Order')||'';
+  S.fields.hidden = all.find(p=>p==='Hide from Grid')||'';
   if (!S.fields.img)   return alert('Please select a cover/image field.');
   if (!S.fields.title) return alert('Please select a title field.');
   persist();
-  show('app','flex'); hide('map-screen');
-  document.getElementById('conn-lbl').textContent = S.dbName || 'Connected';
-  loadPosts();
+  showApp();
+  loadPosts(); renderProfile();
+}
+
+function remapFields() {
+  closeSettings();
+  // reload schema then go back to field map
+  loading(true);
+  notion('/databases/'+S.dbId).then(schema=>{
+    loading(false);
+    _schema = schema.properties;
+    renderFieldMap(_schema);
+    goS(2);
+  }).catch(e=>{ loading(false); toast('Error: '+e.message); });
 }
 
 function disconnect() {
-  if (!confirm('Disconnect and clear all settings?')) return;
+  if(!confirm('Disconnect and clear all settings?')) return;
   localStorage.removeItem(KEY);
-  S = { token:'', dbId:'', dbName:'', dark:false, cols:3, tab:'main', fields:{img:'',title:'',date:'',status:'',format:'',order:'',hidden:''}, profile:{username:'',avatar:'',bio:'',link:''}, posts:[], sel:null, dragFrom:null, lbIdx:null };
-  applyTheme();
-  goSetup();
+  S={token:'',dbId:'',dbName:'',dark:false,cols:3,tab:'main',fields:{img:'',title:'',date:'',status:'',format:'',order:'',hidden:''},profile:{username:'',avatar:'',bio:'',link:''},posts:[],sel:null,dragFrom:null};
+  applyTheme(); closeSettings(); goS(0);
 }
 
-// ── LOAD POSTS ────────────────────────────────────────────────────────────────
+// ── Load posts ────────────────────────────────────────────────────────────────
 async function loadPosts() {
   loading(true);
   try {
-    let all = [], cursor;
+    let all=[], cursor;
     do {
-      const body = { page_size:100, sorts:[] };
-      if (S.fields.order) body.sorts.push({ property:S.fields.order, direction:'ascending' });
-      else if (S.fields.date) body.sorts.push({ property:S.fields.date, direction:'ascending' });
-      if (cursor) body.start_cursor = cursor;
-      const r = await notion('/databases/' + S.dbId + '/query', 'POST', body);
+      const body={page_size:100,sorts:[]};
+      if (S.fields.order) body.sorts.push({property:S.fields.order,direction:'ascending'});
+      else if (S.fields.date) body.sorts.push({property:S.fields.date,direction:'ascending'});
+      if (cursor) body.start_cursor=cursor;
+      const r = await notion('/databases/'+S.dbId+'/query','POST',body);
       all = all.concat(r.results);
-      cursor = r.has_more ? r.next_cursor : null;
-    } while (cursor && all.length < 60);
-
-    S.posts = all.slice(0,60).map(parse).filter(Boolean);
+      cursor = r.has_more?r.next_cursor:null;
+    } while(cursor && all.length<60);
+    S.posts = all.slice(0,60).map(parsePage).filter(Boolean);
     loading(false);
     renderAll();
-  } catch(e) {
-    loading(false);
-    toast('Error loading posts: ' + e.message);
-  }
+  } catch(e){ loading(false); toast('Error: '+e.message); }
 }
 
 function refresh() { loadPosts(); }
 
-function parse(page) {
-  const p = page.properties, f = S.fields;
+function parsePage(page) {
+  const p=page.properties, f=S.fields;
 
-  let title = 'Untitled';
-  if (f.title && p[f.title]) {
-    const arr = p[f.title].title || p[f.title].rich_text || [];
-    title = arr.map(t => t.plain_text).join('') || 'Untitled';
+  let title='Untitled';
+  if (f.title&&p[f.title]) {
+    const arr=p[f.title].title||p[f.title].rich_text||[];
+    title=arr.map(t=>t.plain_text).join('')||'Untitled';
   }
 
-  // Image: named field first, then page cover
-  let img = '';
-  if (f.img && p[f.img]) {
-    const fp = p[f.img];
-    img = fp.url || (fp.rich_text||[]).map(t => t.plain_text).join('') || '';
+  // Image priority: named URL field → page cover → first page body image (fetched lazily)
+  let img='';
+  if (f.img&&p[f.img]) {
+    const fp=p[f.img];
+    if (fp.type==='url') img=fp.url||'';
+    else if (fp.type==='rich_text') img=(fp.rich_text||[]).map(t=>t.plain_text).join('');
+    else if (fp.type==='files'&&fp.files?.length) img=fp.files[0].file?.url||fp.files[0].external?.url||'';
   }
-  if (!img && page.cover) {
-    img = page.cover.external?.url || page.cover.file?.url || '';
+  if (!img&&page.cover) img=page.cover.external?.url||page.cover.file?.url||'';
+  // If still no image, we'll lazy-fetch the first block image
+  const needsBodyFetch = !img;
+
+  let date='';
+  if (f.date&&p[f.date]?.date?.start) date=p[f.date].date.start;
+
+  let status='',color='gray';
+  if (f.status&&p[f.status]) {
+    const sp=p[f.status].select||p[f.status].status;
+    status=sp?.name||''; color=sp?.color||'gray';
   }
 
-  let date = '';
-  if (f.date && p[f.date]?.date?.start) date = p[f.date].date.start;
+  let format='';
+  if (f.format&&p[f.format]) format=p[f.format].select?.name||p[f.format].status?.name||'';
 
-  let status = '', color = 'gray';
-  if (f.status && p[f.status]) {
-    const sp = p[f.status].select || p[f.status].status;
-    status = sp?.name || ''; color = sp?.color || 'gray';
-  }
+  let hidden=false;
+  if (f.hidden&&p[f.hidden]) hidden=p[f.hidden].checkbox||false;
 
-  let format = '';
-  if (f.format && p[f.format]) format = p[f.format].select?.name || p[f.format].status?.name || '';
-
-  let hidden = false;
-  if (f.hidden && p[f.hidden]) hidden = p[f.hidden].checkbox || false;
-
-  return { id:page.id, title, img, date, status, color, format, hidden };
+  return {id:page.id, title, img, date, status, color, format, hidden, needsBodyFetch};
 }
 
-// ── TABS ──────────────────────────────────────────────────────────────────────
+// Lazy-fetch first image from page body for posts with no cover
+async function fetchBodyImages(posts) {
+  const needy = posts.filter(p=>p.needsBodyFetch&&!p.img);
+  if (!needy.length) return;
+  await Promise.all(needy.map(async post => {
+    try {
+      const r = await notion('/blocks/'+post.id+'/children?page_size=20');
+      for (const b of (r.results||[])) {
+        let url='';
+        if (b.type==='image') {
+          url=b.image?.file?.url||b.image?.external?.url||'';
+        }
+        if (url) { post.img=url; post.needsBodyFetch=false; break; }
+      }
+    } catch(e){/* silently skip */}
+  }));
+  renderAll();
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
 function switchTab(tab) {
-  S.tab = tab;
-  document.querySelectorAll('.h-tab').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  S.tab=tab;
+  document.querySelectorAll('.h-tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
   renderAll();
 }
 
 function visiblePosts() {
-  return S.posts.filter(p => {
-    if (S.tab === 'reels') return (p.format||'').toLowerCase().includes('reel');
-    if (S.tab === 'tagged') return false;
+  return S.posts.filter(p=>{
+    if (S.tab==='reels') return (p.format||'').toLowerCase().includes('reel');
+    if (S.tab==='tagged') return false;
     return true;
   });
 }
 
-// ── RENDER ────────────────────────────────────────────────────────────────────
+// ── Render ────────────────────────────────────────────────────────────────────
 function renderAll() {
   renderSidebar();
   renderGrid();
-  const n = S.posts.length;
-  document.getElementById('post-count').textContent = n + ' post' + (n!==1?'s':'');
-  document.getElementById('ig-pc').textContent = n;
+  const n=S.posts.length;
+  document.getElementById('sb-count').textContent=n+' post'+(n!==1?'s':'');
+  document.getElementById('ig-pc').textContent=n;
 }
 
 function renderSidebar() {
-  const el = document.getElementById('post-list');
-  el.innerHTML = '';
-  S.posts.forEach((post, i) => {
-    const d = document.createElement('div');
-    d.className = 'p-row' + (post.id === S.sel?' active':'') + (post.hidden?' hidden-post':'');
-    d.draggable = true;
-    d.innerHTML = `
-      <div class="p-num">${i+1}</div>
-      <div class="p-thumb">${post.img?`<img src="${esc(post.img)}" onerror="this.parentNode.textContent='◻'">`:'◻'}</div>
-      <div class="p-info"><div class="p-name">${esc(post.title)}</div><div class="p-date">${post.date?fmtDate(post.date):post.status||'—'}</div></div>
-      <div class="p-eye${post.hidden?' hidden':''}" title="${post.hidden?'Show in grid':'Hide from grid'}" onclick="toggleHide(event,'${post.id}')">${post.hidden?'○':'●'}</div>
-      <div class="p-handle">⠿</div>`;
-    d.onclick    = e => { if (e.target.classList.contains('p-eye') || e.target.classList.contains('p-handle')) return; select(post.id); };
-    d.ondragstart= e => { S.dragFrom=i; d.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; };
-    d.ondragend  = () => { d.classList.remove('dragging'); document.querySelectorAll('.p-row').forEach(x=>x.classList.remove('drag-over')); };
-    d.ondragover = e => { e.preventDefault(); d.classList.add('drag-over'); };
-    d.ondragleave= () => d.classList.remove('drag-over');
-    d.ondrop     = e => { e.preventDefault(); d.classList.remove('drag-over'); reorder(S.dragFrom, i); };
+  const el=document.getElementById('plist');
+  el.innerHTML='';
+  S.posts.forEach((post,i)=>{
+    const d=document.createElement('div');
+    d.className='pr'+(post.id===S.sel?' active':'')+(post.hidden?' hp':'');
+    d.draggable=true;
+    d.innerHTML=`
+      <div class="pnum">${i+1}</div>
+      <div class="pthumb">${post.img?`<img src="${esc(post.img)}" loading="lazy" onerror="this.parentNode.textContent='◻'">`:'◻'}</div>
+      <div class="pinfo"><div class="pname">${esc(post.title)}</div><div class="pdate">${post.date?fmtDate(post.date):post.status||'—'}</div></div>
+      <div class="peye${post.hidden?' vis':''}" title="${post.hidden?'Show':'Hide'}" onclick="toggleHide(event,'${post.id}')">${post.hidden?'○':'●'}</div>
+      <div class="phdl">⠿</div>`;
+    d.onclick=e=>{if(e.target.classList.contains('peye')||e.target.classList.contains('phdl'))return;selectPost(post.id);};
+    d.ondragstart=e=>{S.dragFrom=i;d.classList.add('dragging');e.dataTransfer.effectAllowed='move';};
+    d.ondragend=()=>{d.classList.remove('dragging');el.querySelectorAll('.pr').forEach(x=>x.classList.remove('dov'));};
+    d.ondragover=e=>{e.preventDefault();d.classList.add('dov');};
+    d.ondragleave=()=>d.classList.remove('dov');
+    d.ondrop=e=>{e.preventDefault();d.classList.remove('dov');reorder(S.dragFrom,i);};
     el.appendChild(d);
   });
 }
 
 function renderGrid() {
-  const el = document.getElementById('ig-grid');
-  el.className = 'ig-grid cols' + S.cols;
-  el.innerHTML = '';
-  const posts = visiblePosts().filter(p => !p.hidden);
-  const total = Math.max(S.cols === 3 ? 9 : 10, Math.ceil(posts.length / S.cols) * S.cols);
-  let gridIdx = 0;
-  for (let i = 0; i < total; i++) {
-    const post = posts[gridIdx];
-    const c = document.createElement('div');
-    if (post) {
-      c.className = 'ig-cell';
-      if (post.img) c.innerHTML = `<img src="${esc(post.img)}" onerror="this.style.display='none'" loading="lazy">`;
-      c.innerHTML += `
-        <div class="cell-ov">
-          <div class="cell-meta">
-            <div class="cell-date">${post.date?fmtDate(post.date):''}</div>
-            <div class="cell-title">${esc(post.title)}</div>
-          </div>
-        </div>
-        <div class="c-num">${gridIdx+1}</div>
-        ${post.format?`<div class="c-fmt">${esc(post.format)}</div>`:''}`;
-      c.onclick    = () => { select(post.id); openLb(gridIdx, posts); };
-      c.draggable  = true;
-      c.dataset.gi = gridIdx;
-      c.ondragstart= e => { S.dragFrom = S.posts.indexOf(post); e.dataTransfer.effectAllowed='move'; };
-      c.ondragover = e => { e.preventDefault(); c.classList.add('dov'); };
-      c.ondragleave= () => c.classList.remove('dov');
-      c.ondrop     = e => { e.preventDefault(); c.classList.remove('dov'); const toPost = posts[+e.currentTarget.dataset.gi]; reorder(S.dragFrom, S.posts.indexOf(toPost)); };
-      gridIdx++;
-    } else {
-      c.className = 'ig-cell empty';
-    }
+  const el=document.getElementById('ig-grid');
+  el.className='ig-grid '+(S.cols===3?'c3':'c5');
+  el.innerHTML='';
+  const posts=visiblePosts().filter(p=>!p.hidden);
+  const total=Math.max(S.cols===3?9:10, Math.ceil(posts.length/S.cols)*S.cols);
+  posts.forEach((post,gi)=>{
+    const c=document.createElement('div');
+    c.className='igc';
+    c.dataset.gi=gi;
+    if(post.img) c.innerHTML=`<img src="${esc(post.img)}" loading="lazy" onerror="this.style.display='none'">`;
+    c.innerHTML+=`
+      <div class="cov"><div class="cmeta">
+        <div class="cdate">${post.date?fmtDate(post.date):''}</div>
+        <div class="ctxt">${esc(post.title)}</div>
+      </div></div>
+      <div class="cnum">${gi+1}</div>
+      ${post.format?`<div class="cfmt">${esc(post.format)}</div>`:''}`;
+    c.onclick=()=>{selectPost(post.id);openLb(gi,posts);};
+    c.draggable=true;
+    c.ondragstart=e=>{S.dragFrom=S.posts.indexOf(post);e.dataTransfer.effectAllowed='move';};
+    c.ondragover=e=>{e.preventDefault();c.classList.add('dov');};
+    c.ondragleave=()=>c.classList.remove('dov');
+    c.ondrop=e=>{e.preventDefault();c.classList.remove('dov');const toPost=posts[+e.currentTarget.dataset.gi];reorder(S.dragFrom,S.posts.indexOf(toPost));};
     el.appendChild(c);
+  });
+  for(let i=posts.length;i<total;i++){
+    const c=document.createElement('div');
+    c.className='igc empty'; el.appendChild(c);
   }
+  // Trigger lazy body image fetch after rendering
+  fetchBodyImages(S.posts);
 }
 
-// ── SELECT ────────────────────────────────────────────────────────────────────
-function select(id) {
-  S.sel = id;
+// ── Select / detail ───────────────────────────────────────────────────────────
+function selectPost(id) {
+  S.sel=id;
   renderSidebar();
-  const post = S.posts.find(p => p.id === id);
-  if (!post) return;
-  hide('d-empty');
-  const el = document.getElementById('d-body');
-  el.style.display = 'block';
-  const colorMap = { gray:'tg', green:'tgn', blue:'tgb', orange:'tgo', red:'tgr', purple:'tgp', yellow:'tgy', pink:'tgp', brown:'tg', default:'tg' };
-  const tc = colorMap[post.color] || 'tg';
-  el.innerHTML = `
+  const post=S.posts.find(p=>p.id===id);
+  if(!post) return;
+  document.getElementById('det-empty').style.display='none';
+  const el=document.getElementById('det-body');
+  el.style.display='block';
+  const cm={gray:'tg',green:'tgn',blue:'tgb',orange:'tgo',red:'tgr',purple:'tgp',yellow:'tgy',pink:'tgp',brown:'tg'};
+  const tc=cm[post.color]||'tg';
+  el.innerHTML=`
     ${post.img
-      ? `<div class="d-img"><img src="${esc(post.img)}" onerror="this.parentNode.innerHTML='<span style=font-size:24px;color:var(--border2)>◻</span>'"></div>`
-      : `<div class="d-img" style="border-style:dashed"><span style="font-size:24px;color:var(--border2)">◻</span></div>`}
-    <div class="d-name">${esc(post.title)}</div>
-    <div class="d-date">${post.date?fmtDate(post.date):'No date set'}</div>
-    ${post.status?`<span class="d-tag ${tc}">${esc(post.status)}</span>`:''}
-    ${post.format?`<span class="d-tag tg">${esc(post.format)}</span>`:''}
-    ${post.img?`<div class="d-sec">Image URL</div><a class="d-link" href="${esc(post.img)}" target="_blank">${esc(post.img.slice(0,50))}${post.img.length>50?'…':''}</a>`:''}
-    <button class="d-btn ${post.hidden?'show-btn':'hide-btn'}" onclick="toggleHide(event,'${post.id}')">${post.hidden?'Show in grid':'Hide from grid'}</button>`;
+      ?`<div class="det-img"><img src="${esc(post.img)}" onerror="this.parentNode.innerHTML='<span style=font-size:22px;color:var(--b2)>◻</span>'"></div>`
+      :`<div class="det-img" style="border-style:dashed"><span style="font-size:22px;color:var(--b2)">◻</span></div>`}
+    <div class="det-name">${esc(post.title)}</div>
+    <div class="det-date">${post.date?fmtDate(post.date):'No date set'}</div>
+    ${post.status?`<span class="dtag ${tc}">${esc(post.status)}</span>`:''}
+    ${post.format?`<span class="dtag tg">${esc(post.format)}</span>`:''}
+    ${post.img?`<div class="det-sec">Image URL</div><a class="det-link" href="${esc(post.img)}" target="_blank">${esc(post.img.slice(0,52))}${post.img.length>52?'…':''}</a>`:''}
+    <button class="det-btn ${post.hidden?'show':'hide'}" onclick="toggleHide(event,'${post.id}')">${post.hidden?'Show in grid':'Hide from grid'}</button>`;
 }
 
-// ── HIDE / SHOW ───────────────────────────────────────────────────────────────
-async function toggleHide(e, id) {
+// ── Hide ──────────────────────────────────────────────────────────────────────
+async function toggleHide(e,id) {
   e.stopPropagation();
-  const post = S.posts.find(p => p.id === id);
-  if (!post) return;
-  post.hidden = !post.hidden;
+  const post=S.posts.find(p=>p.id===id);
+  if(!post) return;
+  post.hidden=!post.hidden;
   renderAll();
-  if (S.sel === id) select(id);
-  if (S.fields.hidden) {
+  if(S.sel===id) selectPost(id);
+  if(S.fields.hidden) {
     try {
-      await notion('/pages/' + id, 'PATCH', { properties:{ [S.fields.hidden]:{ checkbox: post.hidden } } });
-      toast(post.hidden ? 'Hidden from grid ✓' : 'Visible in grid ✓');
-    } catch(e) {
-      toast('Could not sync visibility: ' + e.message);
-    }
+      await notion('/pages/'+id,'PATCH',{properties:{[S.fields.hidden]:{checkbox:post.hidden}}});
+      toast(post.hidden?'Hidden from grid ✓':'Visible in grid ✓');
+    } catch(e){ toast('Sync failed: '+e.message); }
   } else {
-    toast(post.hidden ? 'Hidden locally. Add a Checkbox "Hide from Grid" to sync to Notion.' : 'Visible again.');
+    toast(post.hidden?'Hidden locally. Create "Hide from Grid" checkbox to sync.':'Visible again.');
   }
 }
 
-// ── DRAG REORDER ──────────────────────────────────────────────────────────────
-async function reorder(from, to) {
-  if (from === to || from == null || to == null) return;
-  const arr = [...S.posts];
-  const [moved] = arr.splice(from, 1);
-  arr.splice(to, 0, moved);
-  S.posts = arr;
+// ── Reorder ───────────────────────────────────────────────────────────────────
+async function reorder(from,to) {
+  if(from===to||from==null||to==null) return;
+  const arr=[...S.posts];
+  const [moved]=arr.splice(from,1);
+  arr.splice(to,0,moved);
+  S.posts=arr;
   renderAll();
-  if (S.fields.order) {
+  if(S.fields.order) {
     loading(true);
     try {
-      await Promise.all(S.posts.map((p,i) =>
-        notion('/pages/'+p.id, 'PATCH', { properties:{ [S.fields.order]:{ number: i+1 } } })
-      ));
+      await Promise.all(S.posts.map((p,i)=>notion('/pages/'+p.id,'PATCH',{properties:{[S.fields.order]:{number:i+1}}})));
       loading(false);
       toast('Order saved to Notion ✓');
-    } catch(e) {
-      loading(false);
-      toast('Could not save order: ' + e.message);
-    }
+    } catch(e){ loading(false); toast('Could not save order: '+e.message); }
   } else {
-    toast('Reordered. Add a Number property "Grid Order" to sync to Notion.');
+    toast('Reordered. Create "Grid Order" number property to sync to Notion.');
   }
 }
 
-// ── LIGHTBOX ──────────────────────────────────────────────────────────────────
-let _lbPosts = [];
-function openLb(idx, posts) {
-  _lbPosts = posts;
-  setLb(idx);
-  document.getElementById('lightbox').classList.add('on');
+// ── Lightbox ──────────────────────────────────────────────────────────────────
+function openLb(idx,posts) { _lbPosts=posts; _lbIdx=idx; setLb(idx); document.getElementById('lb').classList.add('on'); }
+function setLb(i) {
+  _lbIdx=i;
+  const p=_lbPosts[i];
+  if(!p) return;
+  document.getElementById('lb-img').src=p.img||'';
+  document.getElementById('lb-title').textContent=p.title;
+  document.getElementById('lb-date').textContent=p.date?fmtDate(p.date):'';
 }
-function setLb(idx) {
-  S.lbIdx = idx;
-  const post = _lbPosts[idx];
-  if (!post) return;
-  document.getElementById('lb-img').src = post.img || '';
-  document.getElementById('lb-title').textContent = post.title;
-  document.getElementById('lb-date').textContent = post.date ? fmtDate(post.date) : '';
-}
-function lbNav(dir) { const n = (S.lbIdx + dir + _lbPosts.length) % _lbPosts.length; setLb(n); }
-function closeLb() { document.getElementById('lightbox').classList.remove('on'); }
-document.addEventListener('keydown', e => { if (e.key==='Escape') closeLb(); if (e.key==='ArrowLeft') lbNav(-1); if (e.key==='ArrowRight') lbNav(1); });
-document.getElementById('lightbox').onclick = e => { if (e.target === document.getElementById('lightbox')) closeLb(); };
+function lbNav(d) { setLb((_lbIdx+d+_lbPosts.length)%_lbPosts.length); }
+function closeLb() { document.getElementById('lb').classList.remove('on'); }
+document.getElementById('lb').onclick=e=>{ if(e.target===document.getElementById('lb')) closeLb(); };
+document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeLb(); if(e.key==='ArrowLeft')lbNav(-1); if(e.key==='ArrowRight')lbNav(1); });
 
-// ── PROFILE ───────────────────────────────────────────────────────────────────
+// ── Profile ───────────────────────────────────────────────────────────────────
 function renderProfile() {
-  const pr = S.profile;
-  const un = pr.username || (S.dbName ? '@' + S.dbName.toLowerCase().replace(/\s+/g,'_') : '@youraccount');
-  document.getElementById('ig-un').textContent = un;
-  document.getElementById('ig-bio').textContent = pr.bio || '';
-  const avEl = document.getElementById('ig-av');
-  const letter = document.getElementById('ig-av-letter');
-  if (pr.avatar) {
-    letter.innerHTML = `<img src="${esc(pr.avatar)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.remove()">`;
-  } else {
-    letter.textContent = un.replace('@','')[0]?.toUpperCase() || 'S';
+  const pr=S.profile;
+  const un=pr.username||'@'+(S.dbName||'feed').toLowerCase().replace(/\s+/g,'_');
+  document.getElementById('ig-un').textContent=un;
+  document.getElementById('ig-bio').textContent=pr.bio||'';
+  const avL=document.getElementById('ig-av-l');
+  if(pr.avatar) avL.innerHTML=`<img src="${esc(pr.avatar)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.remove()">`;
+  else avL.textContent=un.replace('@','')[0]?.toUpperCase()||'S';
+  const lkEl=document.getElementById('ig-links');
+  lkEl.innerHTML='';
+  if(pr.link){
+    const c=document.createElement('div');
+    c.className='ig-chip';
+    c.textContent=pr.link.replace(/^https?:\/\//,'').split('/')[0];
+    c.onclick=()=>window.open(pr.link,'_blank');
+    lkEl.appendChild(c);
   }
-  const linksEl = document.getElementById('ig-links');
-  linksEl.innerHTML = '';
-  if (pr.link) {
-    const chip = document.createElement('div');
-    chip.className = 'ig-link-chip';
-    chip.textContent = pr.link.replace(/^https?:\/\//,'').split('/')[0];
-    chip.onclick = () => window.open(pr.link,'_blank');
-    linksEl.appendChild(chip);
-  }
-  const add = document.createElement('div');
-  add.className = 'ig-link-chip ig-link-add';
-  add.textContent = '+ Edit profile';
-  add.onclick = () => openModal('profile-modal');
-  linksEl.appendChild(add);
+  const add=document.createElement('div');
+  add.className='ig-chip ig-chip-add';
+  add.textContent='+ Edit profile';
+  add.onclick=openModal;
+  lkEl.appendChild(add);
 }
 
-function openModal(id) {
-  if (id === 'profile-modal') {
-    document.getElementById('pm-username').value = S.profile.username || '';
-    document.getElementById('pm-avatar').value   = S.profile.avatar   || '';
-    document.getElementById('pm-bio').value      = S.profile.bio      || '';
-    document.getElementById('pm-link').value     = S.profile.link     || '';
-  }
-  document.getElementById(id).classList.add('on');
+function openModal() {
+  const pr=S.profile;
+  document.getElementById('pm-un').value=pr.username||'';
+  document.getElementById('pm-av').value=pr.avatar||'';
+  document.getElementById('pm-bio').value=pr.bio||'';
+  document.getElementById('pm-lk').value=pr.link||'';
+  document.getElementById('prof-modal').classList.add('on');
 }
-function closeModal(id) { document.getElementById(id).classList.remove('on'); }
-
+function closeModal() { document.getElementById('prof-modal').classList.remove('on'); }
 function saveProfile() {
-  S.profile = {
-    username: document.getElementById('pm-username').value.trim(),
-    avatar:   document.getElementById('pm-avatar').value.trim(),
-    bio:      document.getElementById('pm-bio').value.trim(),
-    link:     document.getElementById('pm-link').value.trim(),
+  S.profile={
+    username:document.getElementById('pm-un').value.trim(),
+    avatar:document.getElementById('pm-av').value.trim(),
+    bio:document.getElementById('pm-bio').value.trim(),
+    link:document.getElementById('pm-lk').value.trim(),
   };
-  persist();
-  renderProfile();
-  closeModal('profile-modal');
+  persist(); renderProfile(); closeModal();
 }
 
-// ── IG INNER TABS ─────────────────────────────────────────────────────────────
-document.querySelectorAll('.ig-tab').forEach(t => {
-  t.onclick = () => {
-    document.querySelectorAll('.ig-tab').forEach(x => x.classList.remove('on'));
-    t.classList.add('on');
-  };
-});
+// ── Settings drawer ───────────────────────────────────────────────────────────
+function openSettings() {
+  const el=document.getElementById('drw-body');
+  const cm={gray:'tg',green:'tgn',blue:'tgb',orange:'tgo',red:'tgr',purple:'tgp'};
+  const fieldRows = [
+    ['Cover/image',S.fields.img],
+    ['Title',S.fields.title],
+    ['Date',S.fields.date||'—'],
+    ['Status',S.fields.status||'—'],
+    ['Format',S.fields.format||'—'],
+    ['Grid Order',S.fields.order?`<span class="drw-badge ob-ok">✓ ${esc(S.fields.order)}</span>`:`<span class="drw-badge" style="background:var(--bg);color:var(--t3);border:1px solid var(--b1);padding:2px 8px;border-radius:20px;font-size:10px">Not set</span>`],
+    ['Hide from Grid',S.fields.hidden?`<span class="drw-badge ob-ok">✓ ${esc(S.fields.hidden)}</span>`:`<span class="drw-badge" style="background:var(--bg);color:var(--t3);border:1px solid var(--b1);padding:2px 8px;border-radius:20px;font-size:10px">Not set</span>`],
+  ];
+  el.innerHTML=`
+    <div class="drw-sec">Connection</div>
+    <div class="drw-row"><div class="drw-rl">Database</div><div class="drw-val">${esc(S.dbName)}</div></div>
+    <div class="drw-row"><div class="drw-rl">Posts loaded</div><div class="drw-val">${S.posts.length}</div></div>
 
-// ── UTILS ─────────────────────────────────────────────────────────────────────
-function loading(on) { document.getElementById('loading').style.display = on?'flex':'none'; }
+    <div class="drw-sec">Field mapping</div>
+    ${fieldRows.map(([l,v])=>`<div class="drw-row"><div class="drw-rl">${l}</div><div class="drw-val">${v.startsWith?.('<')?v:esc(v)}</div></div>`).join('')}
+
+    <div class="drw-sec">Display</div>
+    <div class="drw-row">
+      <div class="drw-rl">Theme</div>
+      <button class="h-btn" style="font-size:11px;padding:4px 10px" onclick="toggleTheme()">${S.dark?'Light mode':'Dark mode'}</button>
+    </div>
+    <div class="drw-row">
+      <div class="drw-rl">Grid columns</div>
+      <button class="h-btn" style="font-size:11px;padding:4px 10px" onclick="toggleCols()">${S.cols===3?'Switch to 5-col':'Switch to 3-col'}</button>
+    </div>`;
+  document.getElementById('settings-drawer').classList.add('open');
+}
+function closeSettings() { document.getElementById('settings-drawer').classList.remove('open'); }
+
+// ── Utils ─────────────────────────────────────────────────────────────────────
+function loading(on) { document.getElementById('loading').style.display=on?'flex':'none'; }
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function fmtDate(d) { return new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); }
 function showErr(id,msg) { const e=document.getElementById(id); e.textContent=msg; e.style.display='block'; }
