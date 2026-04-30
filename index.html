@@ -7,265 +7,376 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#f7f5f2; --surface:#fff; --border:#e5e0d8; --border2:#cec8be;
+  --bg:#f7f5f2; --surface:#ffffff; --border:#e5e0d8; --border2:#cec8be;
   --text:#1c1917; --text2:#6b6560; --text3:#a39e98;
   --accent:#b8956a; --accent2:#8c6840; --green:#5a8a6a; --red:#b85a5a;
+  --overlay:rgba(247,245,242,0.92);
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:13px;}
+.dark {
+  --bg:#111010; --surface:#1c1b1a; --border:#2c2b29; --border2:#3c3b38;
+  --text:#f0ede8; --text2:#a09890; --text3:#5a5550;
+  --accent:#c8a882; --accent2:#d4b896; --green:#6aaa7a; --red:#cc6a6a;
+  --overlay:rgba(17,16,16,0.92);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; font-size:13px; transition:background .2s,color .2s; }
 
-/* ── SETUP ── */
-#setup-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px;}
-.setup-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:40px;width:100%;max-width:460px;box-shadow:0 4px 24px rgba(0,0,0,.06);}
-.setup-logo{font-family:'DM Serif Display',serif;font-style:italic;font-size:26px;color:var(--accent2);margin-bottom:8px;}
-.setup-sub{font-size:12px;color:var(--text3);margin-bottom:28px;line-height:1.7;}
-.setup-label{font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text2);margin-bottom:6px;display:block;}
-.setup-input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--text);background:var(--bg);outline:none;margin-bottom:6px;transition:border-color .15s;}
-.setup-input:focus{border-color:var(--accent);background:#fff;}
-.setup-hint{font-size:11px;color:var(--text3);margin-bottom:16px;line-height:1.6;}
-.setup-hint a{color:var(--accent2);text-decoration:none;}
-.setup-hint a:hover{text-decoration:underline;}
-.btn-main{width:100%;padding:11px;background:var(--text);color:#fff;border:none;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:background .15s;margin-top:8px;}
-.btn-main:hover{background:var(--accent2);}
-.err-box{background:#fdf2f2;border:1px solid #f0cece;color:var(--red);border-radius:4px;padding:10px 12px;font-size:12px;margin-top:12px;display:none;line-height:1.5;}
-
-/* ── DB PICKER ── */
-#db-screen{min-height:100vh;display:none;align-items:center;justify-content:center;padding:32px;}
-.mid-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:32px;width:100%;max-width:500px;box-shadow:0 4px 24px rgba(0,0,0,.06);}
-.card-title{font-size:15px;font-weight:500;margin-bottom:4px;}
-.card-sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
-.back-btn{font-size:11px;color:var(--text3);cursor:pointer;margin-bottom:18px;display:inline-flex;align-items:center;gap:4px;}
-.back-btn:hover{color:var(--text2);}
-.db-list{display:flex;flex-direction:column;gap:6px;margin-bottom:20px;max-height:280px;overflow-y:auto;}
-.db-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all .15s;}
-.db-item:hover{border-color:var(--accent);background:#fdf9f5;}
-.db-item.sel{border-color:var(--accent2);background:#fdf6ef;}
-.db-icon{font-size:18px;flex-shrink:0;}
-.db-name{font-size:13px;font-weight:500;}
-.db-id{font-size:10px;color:var(--text3);font-family:monospace;}
-
-/* ── FIELD MAP ── */
-#map-screen{min-height:100vh;display:none;align-items:center;justify-content:center;padding:32px;}
-.field-row{margin-bottom:14px;}
-.field-sel{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:4px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--text);background:#fff;outline:none;cursor:pointer;}
-.field-sel:focus{border-color:var(--accent);}
+/* ── SCREENS ── */
+.screen { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:36px; width:100%; max-width:460px; box-shadow:0 4px 24px rgba(0,0,0,.07); }
+.logo { font-family:'DM Serif Display',serif; font-style:italic; font-size:26px; color:var(--accent2); margin-bottom:8px; }
+.sub { font-size:12px; color:var(--text3); margin-bottom:26px; line-height:1.7; }
+label.lbl { font-size:11px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--text2); margin-bottom:5px; display:block; }
+.inp, .fsel { width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:4px; font-family:'DM Sans',sans-serif; font-size:12px; color:var(--text); background:var(--bg); outline:none; transition:border-color .15s; }
+.inp { margin-bottom:6px; }
+.inp:focus, .fsel:focus { border-color:var(--accent); background:var(--surface); }
+.hint { font-size:11px; color:var(--text3); margin-bottom:14px; line-height:1.6; }
+.hint a { color:var(--accent2); text-decoration:none; }
+.hint a:hover { text-decoration:underline; }
+.btn-main { width:100%; padding:11px; background:var(--text); color:var(--surface); border:none; border-radius:4px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; cursor:pointer; transition:background .15s; margin-top:8px; }
+.btn-main:hover { background:var(--accent2); }
+.err { background:#fdf2f2; border:1px solid #f0cece; color:var(--red); border-radius:4px; padding:10px 12px; font-size:12px; margin-top:10px; display:none; line-height:1.5; }
+.back { font-size:11px; color:var(--text3); cursor:pointer; margin-bottom:16px; display:inline-flex; align-items:center; gap:4px; }
+.back:hover { color:var(--text2); }
+.card-title { font-size:15px; font-weight:500; margin-bottom:4px; }
+.card-sub { font-size:12px; color:var(--text3); margin-bottom:18px; }
+.db-list { display:flex; flex-direction:column; gap:5px; margin-bottom:18px; max-height:260px; overflow-y:auto; }
+.db-item { display:flex; align-items:center; gap:11px; padding:10px 13px; border:1px solid var(--border); border-radius:4px; cursor:pointer; transition:all .15s; }
+.db-item:hover { border-color:var(--accent); }
+.db-item.sel { border-color:var(--accent2); background:var(--bg); }
+.field-row { margin-bottom:12px; }
 
 /* ── APP ── */
-#app-screen{display:none;min-height:100vh;flex-direction:column;}
-header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;height:48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
-.h-logo{font-family:'DM Serif Display',serif;font-style:italic;font-size:16px;color:var(--accent2);}
-.h-right{display:flex;align-items:center;gap:10px;}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;}
-.lbl{font-size:11px;color:var(--text3);}
-.btn-s{padding:5px 12px;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all .15s;border:1px solid var(--border2);background:transparent;color:var(--text2);}
-.btn-s:hover{background:var(--bg);color:var(--text);}
-.app-body{display:flex;flex:1;height:calc(100vh - 48px);}
+#app { display:none; flex-direction:column; min-height:100vh; }
+header { background:var(--surface); border-bottom:1px solid var(--border); padding:0 16px; height:46px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:50; gap:10px; transition:background .2s; }
+.h-logo { font-family:'DM Serif Display',serif; font-style:italic; font-size:15px; color:var(--accent2); flex-shrink:0; }
+.h-tabs { display:flex; align-items:center; gap:3px; flex:1; justify-content:center; }
+.h-tab { padding:4px 12px; border-radius:20px; font-size:11px; font-weight:500; cursor:pointer; border:1px solid transparent; color:var(--text3); background:transparent; transition:all .15s; white-space:nowrap; }
+.h-tab:hover { color:var(--text2); }
+.h-tab.on { background:var(--text); color:var(--surface); }
+.h-right { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+.dot { width:6px; height:6px; border-radius:50%; background:var(--green); display:inline-block; }
+.conn-lbl { font-size:10px; color:var(--text3); max-width:90px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.btn-s { padding:4px 10px; border-radius:3px; font-size:11px; font-weight:500; cursor:pointer; border:1px solid var(--border2); background:transparent; color:var(--text2); font-family:'DM Sans',sans-serif; transition:all .15s; }
+.btn-s:hover { background:var(--bg); color:var(--text); }
+.icon-btn { width:26px; height:26px; border-radius:3px; border:1px solid var(--border2); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:13px; color:var(--text2); transition:all .15s; flex-shrink:0; }
+.icon-btn:hover { background:var(--bg); color:var(--text); }
+.body { display:flex; flex:1; height:calc(100vh - 46px); }
 
 /* ── SIDEBAR ── */
-.sidebar{width:248px;min-width:248px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
-.sb-head{padding:14px 16px 10px;border-bottom:1px solid var(--border);}
-.sb-title{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:2px;}
-.sb-count{font-size:11px;color:var(--text2);}
-.post-list{flex:1;overflow-y:auto;padding:6px;}
-.post-list::-webkit-scrollbar{width:3px;}
-.post-list::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
-.p-row{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:4px;cursor:pointer;transition:background .12s;border:1px solid transparent;margin-bottom:2px;user-select:none;}
-.p-row:hover{background:var(--bg);}
-.p-row.active{background:#fdf6ef;border-color:var(--accent);}
-.p-row.dragging{opacity:.3;}
-.p-row.drag-over{border-color:var(--accent2);background:#fdf3e8;}
-.p-num{font-size:10px;font-weight:600;color:var(--text3);width:14px;text-align:center;flex-shrink:0;}
-.p-thumb{width:36px;height:36px;border-radius:2px;background:var(--bg);border:1px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;color:var(--text3);font-size:13px;}
-.p-thumb img{width:100%;height:100%;object-fit:cover;}
-.p-info{flex:1;min-width:0;}
-.p-name{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:1px;}
-.p-date{font-size:10px;color:var(--text3);}
-.p-handle{color:var(--text3);font-size:13px;cursor:grab;flex-shrink:0;opacity:0;transition:opacity .12s;}
-.p-row:hover .p-handle{opacity:1;}
-.drag-tip{font-size:10px;color:var(--text3);text-align:center;padding:10px 14px;border-top:1px solid var(--border);line-height:1.6;}
+.sidebar { width:236px; min-width:236px; background:var(--surface); border-right:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; transition:background .2s; }
+.sb-head { padding:11px 13px 8px; border-bottom:1px solid var(--border); }
+.sb-title { font-size:10px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--text3); margin-bottom:1px; }
+.sb-count { font-size:11px; color:var(--text2); }
+.post-list { flex:1; overflow-y:auto; padding:5px; }
+.post-list::-webkit-scrollbar { width:3px; }
+.post-list::-webkit-scrollbar-thumb { background:var(--border2); border-radius:2px; }
+.p-row { display:flex; align-items:center; gap:8px; padding:6px 7px; border-radius:4px; cursor:pointer; border:1px solid transparent; margin-bottom:2px; user-select:none; transition:background .1s; }
+.p-row:hover { background:var(--bg); }
+.p-row.active { background:var(--bg); border-color:var(--accent); }
+.p-row.hidden-post { opacity:.4; }
+.p-row.dragging { opacity:.3; }
+.p-row.drag-over { border-color:var(--accent2); }
+.p-num { font-size:10px; font-weight:600; color:var(--text3); width:13px; text-align:center; flex-shrink:0; }
+.p-thumb { width:28px; height:35px; border-radius:2px; background:var(--bg); border:1px solid var(--border); flex-shrink:0; display:flex; align-items:center; justify-content:center; overflow:hidden; color:var(--text3); font-size:10px; }
+.p-thumb img { width:100%; height:100%; object-fit:cover; }
+.p-info { flex:1; min-width:0; }
+.p-name { font-size:11px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:1px; }
+.p-date { font-size:10px; color:var(--text3); }
+.p-handle { color:var(--text3); font-size:12px; cursor:grab; flex-shrink:0; opacity:0; transition:opacity .12s; }
+.p-row:hover .p-handle { opacity:1; }
+.p-eye { font-size:11px; color:var(--text3); flex-shrink:0; opacity:0; cursor:pointer; transition:opacity .1s; }
+.p-row:hover .p-eye { opacity:1; }
+.p-eye.hidden { opacity:1; color:var(--red); }
+.drag-tip { font-size:10px; color:var(--text3); text-align:center; padding:8px 12px; border-top:1px solid var(--border); line-height:1.6; }
+
+/* ── GRID AREA ── */
+.grid-area { flex:1; overflow-y:auto; padding:24px; display:flex; flex-direction:column; align-items:center; background:var(--bg); transition:background .2s; }
+.ig-phone { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,.10); transition:all .2s; }
+.ig-phone.w3 { width:316px; }
+.ig-phone.w5 { width:500px; }
+
+/* ── PROFILE ── */
+.ig-bio-area { padding:14px 14px 10px; border-bottom:1px solid var(--border); }
+.ig-bio-top { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+.ig-av { width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2)); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display',serif; font-style:italic; font-size:20px; color:#fff; overflow:hidden; cursor:pointer; position:relative; }
+.ig-av img { width:100%; height:100%; object-fit:cover; }
+.ig-av-edit { position:absolute; bottom:0; right:0; width:17px; height:17px; background:rgba(0,0,0,.6); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; color:#fff; opacity:0; transition:opacity .15s; }
+.ig-av:hover .ig-av-edit { opacity:1; }
+.ig-meta { flex:1; }
+.ig-un { font-size:13px; font-weight:700; margin-bottom:3px; }
+.ig-stats { display:flex; gap:14px; }
+.ig-sn { font-size:12px; font-weight:700; display:block; }
+.ig-sl { font-size:9px; color:var(--text3); display:block; }
+.ig-bio-text { font-size:11px; color:var(--text2); line-height:1.5; margin-bottom:5px; min-height:16px; cursor:pointer; border-radius:3px; padding:2px 3px; transition:background .15s; }
+.ig-bio-text:hover { background:var(--bg); }
+.ig-bio-text:empty::before { content:'Add a bio…'; color:var(--text3); }
+.ig-links { display:flex; gap:5px; flex-wrap:wrap; }
+.ig-link-chip { font-size:10px; color:var(--accent2); background:var(--bg); padding:2px 8px; border-radius:3px; border:1px solid var(--border); cursor:pointer; transition:all .15s; }
+.ig-link-chip:hover { border-color:var(--accent); }
+.ig-link-add { border-style:dashed; color:var(--text3); }
+
+/* ── IG TABS ── */
+.ig-tabs { display:flex; border-bottom:1px solid var(--border); }
+.ig-tab { flex:1; padding:7px; text-align:center; font-size:13px; opacity:.2; cursor:pointer; transition:opacity .15s; border-bottom:1.5px solid transparent; }
+.ig-tab.on { opacity:1; border-bottom-color:var(--text); }
 
 /* ── GRID ── */
-.grid-wrap{flex:1;overflow-y:auto;padding:28px;display:flex;flex-direction:column;align-items:center;background:var(--bg);}
-.ig-phone{width:315px;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.10);}
-.ig-hd{padding:14px 14px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px;}
-.ig-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-style:italic;font-size:17px;color:#fff;}
-.ig-un{font-size:12px;font-weight:600;margin-bottom:2px;}
-.ig-stats{display:flex;gap:11px;}
-.ig-sn{font-size:11px;font-weight:700;display:block;}
-.ig-sl{font-size:9px;color:var(--text3);display:block;}
-.ig-tabs{display:flex;border-bottom:1px solid var(--border);}
-.ig-tab{flex:1;padding:8px;text-align:center;font-size:15px;opacity:.2;}
-.ig-tab.on{opacity:1;border-bottom:1.5px solid var(--text);}
-.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);}
-.ig-cell{aspect-ratio:1;position:relative;overflow:hidden;background:var(--bg);cursor:pointer;transition:opacity .15s;}
-.ig-cell:hover{opacity:.88;}
-.ig-cell img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
-.ig-cell.empty{cursor:default;display:flex;align-items:center;justify-content:center;}
-.ig-cell.empty::after{content:'+';font-size:16px;color:var(--border2);}
-.ig-cell.dov{outline:2px solid var(--accent);outline-offset:-2px;}
-.c-num{position:absolute;top:5px;left:5px;background:rgba(0,0,0,.45);backdrop-filter:blur(3px);color:#fff;font-size:9px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;}
-.ig-cell:hover .c-num{opacity:1;}
-.c-fmt{position:absolute;bottom:4px;right:4px;background:rgba(0,0,0,.45);backdrop-filter:blur(3px);color:#fff;font-size:8px;padding:2px 4px;border-radius:2px;opacity:0;transition:opacity .15s;}
-.ig-cell:hover .c-fmt{opacity:1;}
+.ig-grid { display:grid; gap:1.5px; background:var(--border); }
+.ig-grid.cols3 { grid-template-columns:repeat(3,1fr); }
+.ig-grid.cols5 { grid-template-columns:repeat(5,1fr); }
+.ig-cell { aspect-ratio:4/5; position:relative; overflow:hidden; background:var(--bg); cursor:pointer; }
+.ig-cell img { width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; transition:transform .2s; }
+.ig-cell:hover img { transform:scale(1.03); }
+.ig-cell.empty { cursor:default; display:flex; align-items:center; justify-content:center; }
+.ig-cell.empty::after { content:'+'; font-size:14px; color:var(--border2); }
+.ig-cell.dov { outline:2px solid var(--accent); outline-offset:-2px; }
+.cell-ov { position:absolute; inset:0; background:transparent; transition:background .15s; display:flex; flex-direction:column; justify-content:flex-end; padding:6px; pointer-events:none; }
+.ig-cell:hover .cell-ov { background:rgba(0,0,0,.35); }
+.cell-meta { opacity:0; transition:opacity .15s; }
+.ig-cell:hover .cell-meta { opacity:1; }
+.cell-date { font-size:8px; color:rgba(255,255,255,.8); margin-bottom:1px; }
+.cell-title { font-size:9px; color:#fff; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.c-num { position:absolute; top:4px; left:4px; background:rgba(0,0,0,.5); backdrop-filter:blur(3px); color:#fff; font-size:8px; font-weight:700; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .15s; }
+.ig-cell:hover .c-num { opacity:1; }
+.c-fmt { position:absolute; top:4px; right:4px; background:rgba(0,0,0,.5); backdrop-filter:blur(3px); color:#fff; font-size:8px; padding:1px 4px; border-radius:2px; opacity:0; transition:opacity .15s; }
+.ig-cell:hover .c-fmt { opacity:1; }
 
 /* ── DETAIL ── */
-.detail{width:228px;min-width:228px;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
-.d-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text3);font-size:12px;gap:8px;padding:20px;text-align:center;}
-.d-body{flex:1;overflow-y:auto;padding:14px;}
-.d-body::-webkit-scrollbar{width:3px;}
-.d-body::-webkit-scrollbar-thumb{background:var(--border2);}
-.d-img{width:100%;aspect-ratio:1;border-radius:4px;border:1px solid var(--border);margin-bottom:12px;background:var(--bg);overflow:hidden;display:flex;align-items:center;justify-content:center;}
-.d-img img{width:100%;height:100%;object-fit:cover;}
-.d-name{font-size:13px;font-weight:600;margin-bottom:3px;word-break:break-word;}
-.d-date{font-size:11px;color:var(--text3);margin-bottom:10px;}
-.d-tag{display:inline-flex;align-items:center;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:500;margin-right:3px;margin-bottom:6px;}
-.tg{background:#f0ede8;color:#7a7268;}
-.tgn{background:#e8f5ec;color:#2e7d46;}
-.tgb{background:#e8eef5;color:#3d6b9e;}
-.tgo{background:#fdf0e8;color:#9e6020;}
-.tgr{background:#fde8e8;color:#9e3d3d;}
-.tgp{background:#f0e8fd;color:#6b3d9e;}
-.tgy{background:#fdf5e8;color:#9e7a20;}
-.d-sec{font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;margin-top:12px;}
-.d-link{font-size:10px;color:var(--accent2);word-break:break-all;text-decoration:none;display:block;line-height:1.5;}
-.d-link:hover{text-decoration:underline;}
+.detail { width:218px; min-width:218px; background:var(--surface); border-left:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; transition:background .2s; }
+.d-empty { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--text3); font-size:12px; gap:8px; padding:20px; text-align:center; }
+.d-body { flex:1; overflow-y:auto; padding:12px; }
+.d-body::-webkit-scrollbar { width:3px; }
+.d-body::-webkit-scrollbar-thumb { background:var(--border2); }
+.d-img { width:100%; aspect-ratio:4/5; border-radius:4px; border:1px solid var(--border); margin-bottom:10px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--bg); }
+.d-img img { width:100%; height:100%; object-fit:cover; }
+.d-name { font-size:13px; font-weight:600; margin-bottom:2px; word-break:break-word; }
+.d-date { font-size:11px; color:var(--text3); margin-bottom:8px; }
+.d-tag { display:inline-flex; align-items:center; padding:2px 7px; border-radius:20px; font-size:10px; font-weight:500; margin-right:3px; margin-bottom:5px; }
+.tg  { background:#f0ede8; color:#5a5248; } .dark .tg  { background:#2a2520; color:#b0a898; }
+.tgn { background:#e8f5ec; color:#27500a; } .tgb { background:#e8eef5; color:#0c447c; }
+.tgo { background:#fdf0e8; color:#633806; } .tgr { background:#fde8e8; color:#791f1f; }
+.tgp { background:#f0e8fd; color:#3c3489; } .tgy { background:#fdf5e8; color:#412402; }
+.d-sec { font-size:10px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--text3); margin-bottom:4px; margin-top:10px; }
+.d-link { font-size:10px; color:var(--accent2); word-break:break-all; text-decoration:none; display:block; line-height:1.5; }
+.d-link:hover { text-decoration:underline; }
+.d-btn { width:100%; padding:6px; background:var(--bg); border:1px solid var(--border); border-radius:3px; font-size:11px; font-weight:500; color:var(--text2); cursor:pointer; font-family:'DM Sans',sans-serif; margin-top:8px; transition:all .15s; }
+.d-btn:hover { background:var(--border); color:var(--text); }
+.d-btn.hide-btn { color:var(--red); }
+.d-btn.hide-btn:hover { background:#fdf2f2; border-color:#f0cece; }
+.d-btn.show-btn { color:var(--green); }
+
+/* ── LIGHTBOX ── */
+#lightbox { position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:200; display:none; align-items:center; justify-content:center; }
+#lightbox.on { display:flex; }
+.lb-wrap { position:relative; max-width:400px; width:88%; }
+.lb-img { width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:4px; display:block; }
+.lb-close { position:absolute; top:-34px; right:0; color:#fff; font-size:24px; cursor:pointer; line-height:1; opacity:.7; }
+.lb-close:hover { opacity:1; }
+.lb-nav { position:absolute; top:50%; transform:translateY(-50%); color:#fff; font-size:20px; cursor:pointer; background:rgba(255,255,255,.15); backdrop-filter:blur(4px); width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+.lb-nav:hover { background:rgba(255,255,255,.3); }
+.lb-prev { left:-38px; }
+.lb-next { right:-38px; }
+.lb-info { color:#fff; text-align:center; margin-top:10px; }
+.lb-title { font-size:13px; font-weight:600; }
+.lb-date { font-size:11px; opacity:.5; margin-top:2px; }
+
+/* ── EDIT MODALS ── */
+.modal-bg { position:fixed; inset:0; background:var(--overlay); backdrop-filter:blur(4px); z-index:100; display:none; align-items:center; justify-content:center; padding:20px; }
+.modal-bg.on { display:flex; }
+.modal { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:24px; width:100%; max-width:360px; box-shadow:0 8px 40px rgba(0,0,0,.12); }
+.modal-title { font-size:14px; font-weight:500; margin-bottom:16px; }
+.modal-field { margin-bottom:12px; }
+.modal-field label { font-size:11px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--text3); display:block; margin-bottom:4px; }
+.modal-input { width:100%; padding:8px 10px; border:1px solid var(--border); border-radius:4px; font-family:'DM Sans',sans-serif; font-size:12px; color:var(--text); background:var(--bg); outline:none; }
+.modal-input:focus { border-color:var(--accent); }
+textarea.modal-input { resize:vertical; min-height:60px; }
+.modal-actions { display:flex; gap:8px; margin-top:16px; justify-content:flex-end; }
+.modal-btn { padding:7px 16px; border-radius:4px; font-size:12px; font-weight:500; cursor:pointer; font-family:'DM Sans',sans-serif; border:1px solid var(--border2); background:transparent; color:var(--text2); transition:all .15s; }
+.modal-btn:hover { background:var(--bg); }
+.modal-btn.primary { background:var(--text); color:var(--surface); border-color:var(--text); }
+.modal-btn.primary:hover { background:var(--accent2); border-color:var(--accent2); }
 
 /* ── LOADING / TOAST ── */
-#loading{position:fixed;inset:0;background:rgba(247,245,242,.85);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:200;}
-.spin{width:26px;height:26px;border:2px solid var(--border2);border-top-color:var(--accent2);border-radius:50%;animation:sp .7s linear infinite;}
-@keyframes sp{to{transform:rotate(360deg);}}
-#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--text);color:#fff;padding:9px 18px;border-radius:4px;font-size:12px;opacity:0;transition:all .25s;z-index:300;pointer-events:none;white-space:nowrap;}
-#toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+#loading { position:fixed; inset:0; background:rgba(0,0,0,.12); backdrop-filter:blur(3px); display:none; align-items:center; justify-content:center; z-index:300; }
+.spin { width:26px; height:26px; border:2px solid var(--border2); border-top-color:var(--accent2); border-radius:50%; animation:sp .7s linear infinite; }
+@keyframes sp { to { transform:rotate(360deg); } }
+#toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(12px); background:var(--text); color:var(--surface); padding:9px 18px; border-radius:4px; font-size:12px; opacity:0; transition:all .25s; z-index:400; pointer-events:none; white-space:nowrap; }
+#toast.on { opacity:1; transform:translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<div id="loading"><div class="spin"></div></div>
+<div id="loading" style="display:none"><div class="spin"></div></div>
 <div id="toast"></div>
 
-<!-- SETUP -->
-<div id="setup-screen">
-  <div class="setup-card">
-    <div class="setup-logo">grid.</div>
-    <div class="setup-sub">Connect your Notion database and preview your Instagram feed visually, right inside Notion.</div>
-    <label class="setup-label">Notion Integration Token</label>
-    <input class="setup-input" id="tok" type="password" placeholder="secret_xxxxxxxxxxxx" autocomplete="off">
-    <p class="setup-hint">
-      Create one at <a href="https://www.notion.so/my-integrations" target="_blank">notion.so/my-integrations</a> with
-      <strong>Read</strong> + <strong>Update content</strong> access. Then share your database with the integration.
-    </p>
-    <button class="btn-main" onclick="connect()">Connect →</button>
-    <div class="err-box" id="err1"></div>
+<!-- ── LIGHTBOX ── -->
+<div id="lightbox">
+  <div class="lb-wrap">
+    <div class="lb-close" onclick="closeLb()">×</div>
+    <div class="lb-nav lb-prev" onclick="lbNav(-1)">‹</div>
+    <div class="lb-nav lb-next" onclick="lbNav(1)">›</div>
+    <img class="lb-img" id="lb-img" src="" alt="">
+    <div class="lb-info">
+      <div class="lb-title" id="lb-title"></div>
+      <div class="lb-date" id="lb-date"></div>
+    </div>
   </div>
 </div>
 
-<!-- DB PICKER -->
-<div id="db-screen">
-  <div class="mid-card">
-    <span class="back-btn" onclick="goSetup()">← Back</span>
+<!-- ── PROFILE EDIT MODAL ── -->
+<div class="modal-bg" id="profile-modal">
+  <div class="modal">
+    <div class="modal-title">Edit profile</div>
+    <div class="modal-field"><label>Username</label><input class="modal-input" id="pm-username" placeholder="@youraccount"></div>
+    <div class="modal-field"><label>Profile picture URL</label><input class="modal-input" id="pm-avatar" placeholder="https://…"></div>
+    <div class="modal-field"><label>Bio</label><textarea class="modal-input" id="pm-bio" placeholder="Your bio text…"></textarea></div>
+    <div class="modal-field"><label>Link (one URL)</label><input class="modal-input" id="pm-link" placeholder="https://yoursite.com"></div>
+    <div class="modal-actions">
+      <button class="modal-btn" onclick="closeModal('profile-modal')">Cancel</button>
+      <button class="modal-btn primary" onclick="saveProfile()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── SETUP ── -->
+<div id="setup-screen" class="screen">
+  <div class="card">
+    <div class="logo">grid.</div>
+    <div class="sub">Connect your Notion database to preview your Instagram feed, inside Notion.</div>
+    <label class="lbl">Notion Integration Token</label>
+    <input class="inp" id="tok" type="password" placeholder="secret_xxxxxxxxxxxx" autocomplete="off">
+    <p class="hint">Create one at <a href="https://www.notion.so/my-integrations" target="_blank">notion.so/my-integrations</a> with <strong>Read</strong> + <strong>Update content</strong> access. Then share your database with it.</p>
+    <button class="btn-main" onclick="connect()">Connect →</button>
+    <div class="err" id="err1"></div>
+  </div>
+</div>
+
+<!-- ── DB PICKER ── -->
+<div id="db-screen" class="screen" style="display:none">
+  <div class="card">
+    <span class="back" onclick="goSetup()">← Back</span>
     <div class="card-title">Choose your database</div>
     <div class="card-sub">Select the Notion database that holds your Instagram posts.</div>
     <div class="db-list" id="db-list"></div>
     <button class="btn-main" onclick="pickDb()">Use this database →</button>
-    <div class="err-box" id="err2"></div>
+    <div class="err" id="err2"></div>
   </div>
 </div>
 
-<!-- FIELD MAP -->
-<div id="map-screen">
-  <div class="mid-card">
-    <span class="back-btn" onclick="goDb()">← Back</span>
+<!-- ── FIELD MAP ── -->
+<div id="map-screen" class="screen" style="display:none">
+  <div class="card">
+    <span class="back" onclick="goDb()">← Back</span>
     <div class="card-title">Map your fields</div>
-    <div class="card-sub">Tell the widget which properties to use. Optional fields can be left as "None".</div>
-
-    <div class="field-row">
-      <label class="setup-label">Image / Asset URL <span style="color:var(--text3)">(required)</span></label>
-      <select class="field-sel" id="f-img"></select>
-    </div>
-    <div class="field-row">
-      <label class="setup-label">Post title <span style="color:var(--text3)">(required)</span></label>
-      <select class="field-sel" id="f-title"></select>
-    </div>
-    <div class="field-row">
-      <label class="setup-label">Publish date <span style="color:var(--text3)">(optional)</span></label>
-      <select class="field-sel" id="f-date"></select>
-    </div>
-    <div class="field-row">
-      <label class="setup-label">Status <span style="color:var(--text3)">(optional)</span></label>
-      <select class="field-sel" id="f-status"></select>
-    </div>
-    <div class="field-row">
-      <label class="setup-label">Format / Type <span style="color:var(--text3)">(optional)</span></label>
-      <select class="field-sel" id="f-format"></select>
-    </div>
-    <div class="field-row">
-      <label class="setup-label">Grid Order <span style="color:var(--text3)">(optional number field, enables drag sync)</span></label>
-      <select class="field-sel" id="f-order"></select>
-    </div>
-
+    <div class="card-sub">The widget auto-detects your fields. Confirm or adjust below.</div>
+    <div class="field-row"><label class="lbl">Cover / image URL field <span style="color:var(--text3)">(required)</span></label><select class="fsel" id="f-img"></select><p class="hint" style="margin-top:5px">Also checks page cover automatically. Priority: this field → page cover.</p></div>
+    <div class="field-row"><label class="lbl">Post title <span style="color:var(--text3)">(required)</span></label><select class="fsel" id="f-title"></select></div>
+    <div class="field-row"><label class="lbl">Publish date <span style="color:var(--text3)">(optional)</span></label><select class="fsel" id="f-date"></select></div>
+    <div class="field-row"><label class="lbl">Status <span style="color:var(--text3)">(optional)</span></label><select class="fsel" id="f-status"></select></div>
+    <div class="field-row"><label class="lbl">Format / type <span style="color:var(--text3)">(optional — used for Reels tab)</span></label><select class="fsel" id="f-format"></select></div>
+    <div class="field-row"><label class="lbl">Grid order <span style="color:var(--text3)">(optional number field)</span></label><select class="fsel" id="f-order"></select><p class="hint" style="margin-top:5px">Add a Number property "Grid Order" to your database to sync drag-and-drop order back to Notion.</p></div>
+    <div class="field-row"><label class="lbl">Hidden from grid <span style="color:var(--text3)">(optional checkbox)</span></label><select class="fsel" id="f-hidden"></select><p class="hint" style="margin-top:5px">Add a Checkbox property "Hide from Grid" to let you exclude posts without deleting them.</p></div>
     <button class="btn-main" onclick="saveMap()">Build my grid →</button>
   </div>
 </div>
 
-<!-- APP -->
-<div id="app-screen">
+<!-- ── APP ── -->
+<div id="app">
   <header>
     <div class="h-logo">grid.</div>
+    <div class="h-tabs">
+      <button class="h-tab on" data-tab="main" onclick="switchTab('main')">Main</button>
+      <button class="h-tab" data-tab="reels" onclick="switchTab('reels')">Reels</button>
+      <button class="h-tab" data-tab="tagged" onclick="switchTab('tagged')">Tagged</button>
+    </div>
     <div class="h-right">
-      <span class="dot"></span><span class="lbl" id="conn-lbl">Connected</span>
-      <button class="btn-s" onclick="refresh()">↺ Refresh</button>
+      <span class="dot"></span>
+      <span class="conn-lbl" id="conn-lbl">Connected</span>
+      <button class="btn-s" onclick="toggleCols()" id="col-btn">5-col</button>
+      <button class="btn-s" onclick="refresh()">↺</button>
+      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle dark mode">◑</button>
       <button class="btn-s" onclick="disconnect()">Disconnect</button>
     </div>
   </header>
-  <div class="app-body">
+  <div class="body">
+
+    <!-- Sidebar -->
     <div class="sidebar">
       <div class="sb-head">
         <div class="sb-title">Scheduled posts</div>
         <div class="sb-count" id="post-count">—</div>
       </div>
       <div class="post-list" id="post-list"></div>
-      <div class="drag-tip">Drag posts in the list or on the grid<br>to reorder. Syncs to Notion automatically.</div>
+      <div class="drag-tip">Drag to reorder. Eye icon hides from grid.<br>Changes sync to Notion.</div>
     </div>
-    <div class="grid-wrap">
-      <div class="ig-phone">
-        <div class="ig-hd">
-          <div class="ig-av" id="ig-av">S</div>
-          <div>
-            <div class="ig-un" id="ig-un">@youraccount</div>
-            <div class="ig-stats">
-              <div><span class="ig-sn" id="ig-pc">0</span><span class="ig-sl">posts</span></div>
-              <div><span class="ig-sn">—</span><span class="ig-sl">followers</span></div>
-              <div><span class="ig-sn">—</span><span class="ig-sl">following</span></div>
+
+    <!-- Grid -->
+    <div class="grid-area">
+      <div class="ig-phone w3" id="ig-phone">
+
+        <!-- Profile -->
+        <div class="ig-bio-area">
+          <div class="ig-bio-top">
+            <div class="ig-av" id="ig-av" onclick="openModal('profile-modal')">
+              <span id="ig-av-letter">S</span>
+              <div class="ig-av-edit">✎</div>
+            </div>
+            <div class="ig-meta">
+              <div class="ig-un" id="ig-un">@youraccount</div>
+              <div class="ig-stats">
+                <div><span class="ig-sn" id="ig-pc">0</span><span class="ig-sl">posts</span></div>
+                <div><span class="ig-sn">—</span><span class="ig-sl">followers</span></div>
+                <div><span class="ig-sn">—</span><span class="ig-sl">following</span></div>
+              </div>
             </div>
           </div>
+          <div class="ig-bio-text" id="ig-bio" onclick="openModal('profile-modal')"></div>
+          <div class="ig-links" id="ig-links"></div>
         </div>
+
+        <!-- IG Tabs -->
         <div class="ig-tabs">
-          <div class="ig-tab on">⊞</div>
-          <div class="ig-tab">☰</div>
-          <div class="ig-tab">♡</div>
+          <div class="ig-tab on" data-igtab="grid">⊞</div>
+          <div class="ig-tab" data-igtab="reels">▷</div>
+          <div class="ig-tab" data-igtab="tagged">⊡</div>
         </div>
-        <div class="ig-grid" id="ig-grid"></div>
+
+        <!-- Grid -->
+        <div class="ig-grid cols3" id="ig-grid"></div>
       </div>
     </div>
+
+    <!-- Detail -->
     <div class="detail">
-      <div class="d-empty" id="d-empty"><span style="font-size:26px;opacity:.3">◻</span>Click a post to see details</div>
+      <div class="d-empty" id="d-empty">
+        <span style="font-size:24px;opacity:.25">◻</span>
+        Click a post to see details
+      </div>
       <div class="d-body" id="d-body" style="display:none"></div>
     </div>
+
   </div>
 </div>
 
 <script>
-// ── The CORS fix: route through corsproxy.io ──────────────────────────────────
-// api.notion.com blocks direct browser requests (no CORS headers).
-// corsproxy.io forwards the request server-side and adds the necessary headers.
 const PROXY = 'https://corsproxy.io/?url=';
+const KEY   = 'ig_grid_v4';
 
-async function notion(path, method = 'GET', body = null) {
-  const target = encodeURIComponent(`https://api.notion.com/v1${path}`);
+let S = {
+  token:'', dbId:'', dbName:'', dark:false, cols:3, tab:'main',
+  fields:{ img:'', title:'', date:'', status:'', format:'', order:'', hidden:'' },
+  profile:{ username:'', avatar:'', bio:'', link:'' },
+  posts:[], sel:null, dragFrom:null, lbIdx:null
+};
+let _dbs = [];
+
+async function notion(path, method='GET', body=null) {
+  const target = encodeURIComponent('https://api.notion.com/v1' + path);
   const opts = {
     method,
     headers: {
-      'Authorization': `Bearer ${S.token}`,
+      'Authorization': 'Bearer ' + S.token,
       'Notion-Version': '2022-06-28',
       'Content-Type': 'application/json',
     }
@@ -273,37 +384,59 @@ async function notion(path, method = 'GET', body = null) {
   if (body) opts.body = JSON.stringify(body);
   const res = await fetch(PROXY + target, opts);
   if (!res.ok) {
-    const e = await res.json().catch(() => ({ message: `HTTP ${res.status}` }));
-    throw new Error(e.message || `HTTP ${res.status}`);
+    const e = await res.json().catch(() => ({ message: 'HTTP ' + res.status }));
+    throw new Error(e.message || 'HTTP ' + res.status);
   }
   return res.json();
 }
 
-// ── State ─────────────────────────────────────────────────────────────────────
-const KEY = 'ig_grid_v3';
-let S = { token:'', dbId:'', dbName:'', fields:{img:'',title:'',date:'',status:'',format:'',order:''}, posts:[], sel:null, dragFrom:null };
-let _dbs = [];
-
-// ── Boot ──────────────────────────────────────────────────────────────────────
+// ── BOOT ──────────────────────────────────────────────────────────────────────
 window.onload = () => {
   try {
     const c = JSON.parse(localStorage.getItem(KEY) || '{}');
-    if (c.token && c.dbId) { Object.assign(S, c); showApp(); loadPosts(); return; }
+    if (c.token && c.dbId) {
+      Object.assign(S, c);
+      applyTheme();
+      show('app', 'flex');
+      document.getElementById('conn-lbl').textContent = S.dbName || 'Connected';
+      loadPosts();
+      renderProfile();
+      return;
+    }
   } catch(e) {}
-  goSetup();
+  show('setup-screen');
 };
 
-function save() { localStorage.setItem(KEY, JSON.stringify({ token:S.token, dbId:S.dbId, dbName:S.dbName, fields:S.fields })); }
+function persist() {
+  localStorage.setItem(KEY, JSON.stringify({
+    token:S.token, dbId:S.dbId, dbName:S.dbName,
+    dark:S.dark, cols:S.cols,
+    fields:S.fields, profile:S.profile
+  }));
+}
 
-// ── Screens ───────────────────────────────────────────────────────────────────
-function goSetup() { show('setup-screen'); hide('db-screen'); hide('map-screen'); hide('app-screen'); }
-function goDb()    { show('db-screen');    hide('setup-screen'); hide('map-screen'); hide('app-screen'); }
-function goMap()   { show('map-screen');   hide('db-screen'); hide('setup-screen'); hide('app-screen'); }
-function showApp() { show('app-screen','flex'); hide('setup-screen'); hide('db-screen'); hide('map-screen'); document.getElementById('conn-lbl').textContent = S.dbName || 'Connected'; }
+// ── SCREENS ───────────────────────────────────────────────────────────────────
 function show(id, d='flex') { document.getElementById(id).style.display = d; }
 function hide(id) { document.getElementById(id).style.display = 'none'; }
+function goSetup() { show('setup-screen'); hide('db-screen'); hide('map-screen'); hide('app'); }
+function goDb()    { hide('setup-screen'); show('db-screen'); hide('map-screen'); hide('app'); }
+function goMap()   { hide('setup-screen'); hide('db-screen'); show('map-screen'); hide('app'); }
 
-// ── Connect ───────────────────────────────────────────────────────────────────
+// ── THEME ─────────────────────────────────────────────────────────────────────
+function toggleTheme() { S.dark = !S.dark; applyTheme(); persist(); }
+function applyTheme() { document.documentElement.classList.toggle('dark', S.dark); }
+
+// ── COLS ──────────────────────────────────────────────────────────────────────
+function toggleCols() {
+  S.cols = S.cols === 3 ? 5 : 3;
+  const phone = document.getElementById('ig-phone');
+  phone.className = 'ig-phone ' + (S.cols === 3 ? 'w3' : 'w5');
+  document.getElementById('ig-grid').className = 'ig-grid cols' + S.cols;
+  document.getElementById('col-btn').textContent = S.cols === 3 ? '5-col' : '3-col';
+  persist();
+}
+
+// ── CONNECT ───────────────────────────────────────────────────────────────────
 async function connect() {
   const tok = document.getElementById('tok').value.trim();
   if (!tok) return showErr('err1', 'Please enter your integration token.');
@@ -312,13 +445,13 @@ async function connect() {
   try {
     const r = await notion('/search', 'POST', { filter:{ value:'database', property:'object' }, page_size:20 });
     loading(false);
-    if (!r.results?.length) return showErr('err1', 'No databases found. Make sure you shared your database with the integration.');
+    if (!r.results?.length) return showErr('err1', 'No databases found. Share your database with the integration first.');
     _dbs = r.results;
     renderDbs();
     goDb();
   } catch(e) {
     loading(false);
-    showErr('err1', `Connection failed: ${e.message}`);
+    showErr('err1', 'Connection failed: ' + e.message);
   }
 }
 
@@ -331,7 +464,7 @@ function renderDbs() {
     const d = document.createElement('div');
     d.className = 'db-item';
     d.dataset.i = i;
-    d.innerHTML = `<div class="db-icon">${icon}</div><div><div class="db-name">${esc(name)}</div><div class="db-id">${db.id.slice(0,8)}…</div></div>`;
+    d.innerHTML = `<span style="font-size:18px">${icon}</span><div><div style="font-size:13px;font-weight:500">${esc(name)}</div><div style="font-size:10px;color:var(--text3);font-family:monospace">${db.id.slice(0,8)}…</div></div>`;
     d.onclick = () => { document.querySelectorAll('.db-item').forEach(x => x.classList.remove('sel')); d.classList.add('sel'); };
     el.appendChild(d);
   });
@@ -342,40 +475,43 @@ async function pickDb() {
   const sel = document.querySelector('.db-item.sel');
   if (!sel) return showErr('err2', 'Select a database first.');
   const db = _dbs[+sel.dataset.i];
-  S.dbId   = db.id;
+  S.dbId = db.id;
   S.dbName = db.title?.[0]?.plain_text || 'Untitled';
   loading(true);
   try {
-    const schema = await notion(`/databases/${S.dbId}`);
+    const schema = await notion('/databases/' + S.dbId);
     loading(false);
     fillFieldMap(schema.properties);
     goMap();
   } catch(e) {
     loading(false);
-    showErr('err2', `Could not load database: ${e.message}`);
+    showErr('err2', 'Could not load database: ' + e.message);
   }
 }
 
 function fillFieldMap(props) {
   const all = Object.keys(props);
-  const urlFields   = all.filter(p => ['url','rich_text','title'].includes(props[p].type));
-  const titleFields = all.filter(p => ['title','rich_text'].includes(props[p].type));
-  const dateFields  = ['(none)', ...all.filter(p => props[p].type === 'date')];
-  const selFields   = ['(none)', ...all.filter(p => ['select','status'].includes(props[p].type))];
-  const numFields   = ['(none)', ...all.filter(p => props[p].type === 'number')];
+  const urlF   = all.filter(p => ['url','rich_text','title'].includes(props[p].type));
+  const titF   = all.filter(p => ['title','rich_text'].includes(props[p].type));
+  const datF   = ['(none)', ...all.filter(p => props[p].type === 'date')];
+  const selF   = ['(none)', ...all.filter(p => ['select','status'].includes(props[p].type))];
+  const numF   = ['(none)', ...all.filter(p => props[p].type === 'number')];
+  const chkF   = ['(none)', ...all.filter(p => props[p].type === 'checkbox')];
 
-  function fill(id, arr, hints) {
-    const s = document.getElementById(id);
-    s.innerHTML = arr.map(p => `<option value="${p === '(none)' ? '' : p}">${p}</option>`).join('');
-    const m = arr.find(p => hints.some(h => p.toLowerCase().includes(h)));
-    if (m && m !== '(none)') s.value = m;
-  }
-  fill('f-img',    urlFields,   ['asset','image','url','link','cover','media','canva','photo']);
-  fill('f-title',  titleFields, ['name','title']);
-  fill('f-date',   dateFields,  ['publish','date','schedule']);
-  fill('f-status', selFields,   ['status']);
-  fill('f-format', selFields,   ['format','type','kind']);
-  fill('f-order',  numFields,   ['order','grid','position','sort']);
+  fill('f-img',    urlF,  ['cover','asset','image','url','link','media','photo','canva']);
+  fill('f-title',  titF,  ['name','title']);
+  fill('f-date',   datF,  ['publish','date','schedule','post']);
+  fill('f-status', selF,  ['status']);
+  fill('f-format', selF,  ['format','type','kind','format']);
+  fill('f-order',  numF,  ['order','grid','position','sort']);
+  fill('f-hidden', chkF,  ['hide','hidden','exclude','skip']);
+}
+
+function fill(id, arr, hints) {
+  const s = document.getElementById(id);
+  s.innerHTML = arr.map(p => `<option value="${p==='(none)'?'':p}">${p}</option>`).join('');
+  const m = arr.find(p => hints.some(h => p.toLowerCase().includes(h)));
+  if (m && m !== '(none)') s.value = m;
 }
 
 function saveMap() {
@@ -386,22 +522,25 @@ function saveMap() {
     status: document.getElementById('f-status').value,
     format: document.getElementById('f-format').value,
     order:  document.getElementById('f-order').value,
+    hidden: document.getElementById('f-hidden').value,
   };
-  if (!S.fields.img)   return alert('Please select an image field.');
+  if (!S.fields.img)   return alert('Please select a cover/image field.');
   if (!S.fields.title) return alert('Please select a title field.');
-  save();
-  showApp();
+  persist();
+  show('app','flex'); hide('map-screen');
+  document.getElementById('conn-lbl').textContent = S.dbName || 'Connected';
   loadPosts();
 }
 
 function disconnect() {
   if (!confirm('Disconnect and clear all settings?')) return;
   localStorage.removeItem(KEY);
-  S = { token:'', dbId:'', dbName:'', fields:{img:'',title:'',date:'',status:'',format:'',order:''}, posts:[], sel:null, dragFrom:null };
+  S = { token:'', dbId:'', dbName:'', dark:false, cols:3, tab:'main', fields:{img:'',title:'',date:'',status:'',format:'',order:'',hidden:''}, profile:{username:'',avatar:'',bio:'',link:''}, posts:[], sel:null, dragFrom:null, lbIdx:null };
+  applyTheme();
   goSetup();
 }
 
-// ── Load posts ────────────────────────────────────────────────────────────────
+// ── LOAD POSTS ────────────────────────────────────────────────────────────────
 async function loadPosts() {
   loading(true);
   try {
@@ -411,16 +550,17 @@ async function loadPosts() {
       if (S.fields.order) body.sorts.push({ property:S.fields.order, direction:'ascending' });
       else if (S.fields.date) body.sorts.push({ property:S.fields.date, direction:'ascending' });
       if (cursor) body.start_cursor = cursor;
-      const r = await notion(`/databases/${S.dbId}/query`, 'POST', body);
+      const r = await notion('/databases/' + S.dbId + '/query', 'POST', body);
       all = all.concat(r.results);
       cursor = r.has_more ? r.next_cursor : null;
-    } while (cursor);
-    S.posts = all.map(parse).filter(Boolean);
+    } while (cursor && all.length < 60);
+
+    S.posts = all.slice(0,60).map(parse).filter(Boolean);
     loading(false);
     renderAll();
   } catch(e) {
     loading(false);
-    toast(`Error: ${e.message}`);
+    toast('Error loading posts: ' + e.message);
   }
 }
 
@@ -429,48 +569,62 @@ function refresh() { loadPosts(); }
 function parse(page) {
   const p = page.properties, f = S.fields;
 
-  // title
   let title = 'Untitled';
   if (f.title && p[f.title]) {
     const arr = p[f.title].title || p[f.title].rich_text || [];
     title = arr.map(t => t.plain_text).join('') || 'Untitled';
   }
 
-  // image: url field first, then page cover
+  // Image: named field first, then page cover
   let img = '';
   if (f.img && p[f.img]) {
     const fp = p[f.img];
-    img = fp.url || (fp.rich_text||[]).map(t=>t.plain_text).join('') || '';
+    img = fp.url || (fp.rich_text||[]).map(t => t.plain_text).join('') || '';
   }
-  if (!img && page.cover) img = page.cover.external?.url || page.cover.file?.url || '';
+  if (!img && page.cover) {
+    img = page.cover.external?.url || page.cover.file?.url || '';
+  }
 
-  // date
   let date = '';
   if (f.date && p[f.date]?.date?.start) date = p[f.date].date.start;
 
-  // status + color
   let status = '', color = 'gray';
   if (f.status && p[f.status]) {
     const sp = p[f.status].select || p[f.status].status;
     status = sp?.name || ''; color = sp?.color || 'gray';
   }
 
-  // format
   let format = '';
   if (f.format && p[f.format]) format = p[f.format].select?.name || p[f.format].status?.name || '';
 
-  return { id:page.id, title, img, date, status, color, format };
+  let hidden = false;
+  if (f.hidden && p[f.hidden]) hidden = p[f.hidden].checkbox || false;
+
+  return { id:page.id, title, img, date, status, color, format, hidden };
 }
 
-// ── Render ────────────────────────────────────────────────────────────────────
+// ── TABS ──────────────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  S.tab = tab;
+  document.querySelectorAll('.h-tab').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  renderAll();
+}
+
+function visiblePosts() {
+  return S.posts.filter(p => {
+    if (S.tab === 'reels') return (p.format||'').toLowerCase().includes('reel');
+    if (S.tab === 'tagged') return false;
+    return true;
+  });
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
 function renderAll() {
   renderSidebar();
   renderGrid();
   const n = S.posts.length;
-  document.getElementById('post-count').textContent = `${n} post${n!==1?'s':''}`;
+  document.getElementById('post-count').textContent = n + ' post' + (n!==1?'s':'');
   document.getElementById('ig-pc').textContent = n;
-  document.getElementById('ig-av').textContent = (S.dbName||'S')[0].toUpperCase();
-  document.getElementById('ig-un').textContent = `@${(S.dbName||'feed').toLowerCase().replace(/\s+/g,'_')}`;
 }
 
 function renderSidebar() {
@@ -478,16 +632,17 @@ function renderSidebar() {
   el.innerHTML = '';
   S.posts.forEach((post, i) => {
     const d = document.createElement('div');
-    d.className = 'p-row' + (post.id === S.sel ? ' active' : '');
+    d.className = 'p-row' + (post.id === S.sel?' active':'') + (post.hidden?' hidden-post':'');
     d.draggable = true;
     d.innerHTML = `
       <div class="p-num">${i+1}</div>
-      <div class="p-thumb">${post.img ? `<img src="${esc(post.img)}" onerror="this.parentNode.textContent='◻'">` : '◻'}</div>
-      <div class="p-info"><div class="p-name">${esc(post.title)}</div><div class="p-date">${post.date ? fmtDate(post.date) : post.status||'—'}</div></div>
+      <div class="p-thumb">${post.img?`<img src="${esc(post.img)}" onerror="this.parentNode.textContent='◻'">`:'◻'}</div>
+      <div class="p-info"><div class="p-name">${esc(post.title)}</div><div class="p-date">${post.date?fmtDate(post.date):post.status||'—'}</div></div>
+      <div class="p-eye${post.hidden?' hidden':''}" title="${post.hidden?'Show in grid':'Hide from grid'}" onclick="toggleHide(event,'${post.id}')">${post.hidden?'○':'●'}</div>
       <div class="p-handle">⠿</div>`;
-    d.onclick    = () => select(post.id);
+    d.onclick    = e => { if (e.target.classList.contains('p-eye') || e.target.classList.contains('p-handle')) return; select(post.id); };
     d.ondragstart= e => { S.dragFrom=i; d.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; };
-    d.ondragend  = () => { d.classList.remove('dragging'); el.querySelectorAll('.p-row').forEach(x=>x.classList.remove('drag-over')); };
+    d.ondragend  = () => { d.classList.remove('dragging'); document.querySelectorAll('.p-row').forEach(x=>x.classList.remove('drag-over')); };
     d.ondragover = e => { e.preventDefault(); d.classList.add('drag-over'); };
     d.ondragleave= () => d.classList.remove('drag-over');
     d.ondrop     = e => { e.preventDefault(); d.classList.remove('drag-over'); reorder(S.dragFrom, i); };
@@ -497,23 +652,34 @@ function renderSidebar() {
 
 function renderGrid() {
   const el = document.getElementById('ig-grid');
+  el.className = 'ig-grid cols' + S.cols;
   el.innerHTML = '';
-  const total = Math.max(9, Math.ceil(S.posts.length / 3) * 3);
+  const posts = visiblePosts().filter(p => !p.hidden);
+  const total = Math.max(S.cols === 3 ? 9 : 10, Math.ceil(posts.length / S.cols) * S.cols);
+  let gridIdx = 0;
   for (let i = 0; i < total; i++) {
-    const post = S.posts[i];
+    const post = posts[gridIdx];
     const c = document.createElement('div');
     if (post) {
       c.className = 'ig-cell';
-      c.dataset.i = i;
-      if (post.img) c.innerHTML = `<img src="${esc(post.img)}" onerror="this.style.display='none'">`;
-      c.innerHTML += `<div class="c-num">${i+1}</div>`;
-      if (post.format) c.innerHTML += `<div class="c-fmt">${esc(post.format)}</div>`;
-      c.onclick    = () => select(post.id);
+      if (post.img) c.innerHTML = `<img src="${esc(post.img)}" onerror="this.style.display='none'" loading="lazy">`;
+      c.innerHTML += `
+        <div class="cell-ov">
+          <div class="cell-meta">
+            <div class="cell-date">${post.date?fmtDate(post.date):''}</div>
+            <div class="cell-title">${esc(post.title)}</div>
+          </div>
+        </div>
+        <div class="c-num">${gridIdx+1}</div>
+        ${post.format?`<div class="c-fmt">${esc(post.format)}</div>`:''}`;
+      c.onclick    = () => { select(post.id); openLb(gridIdx, posts); };
       c.draggable  = true;
-      c.ondragstart= e => { S.dragFrom=i; e.dataTransfer.effectAllowed='move'; };
+      c.dataset.gi = gridIdx;
+      c.ondragstart= e => { S.dragFrom = S.posts.indexOf(post); e.dataTransfer.effectAllowed='move'; };
       c.ondragover = e => { e.preventDefault(); c.classList.add('dov'); };
       c.ondragleave= () => c.classList.remove('dov');
-      c.ondrop     = e => { e.preventDefault(); c.classList.remove('dov'); reorder(S.dragFrom, i); };
+      c.ondrop     = e => { e.preventDefault(); c.classList.remove('dov'); const toPost = posts[+e.currentTarget.dataset.gi]; reorder(S.dragFrom, S.posts.indexOf(toPost)); };
+      gridIdx++;
     } else {
       c.className = 'ig-cell empty';
     }
@@ -521,9 +687,10 @@ function renderGrid() {
   }
 }
 
+// ── SELECT ────────────────────────────────────────────────────────────────────
 function select(id) {
   S.sel = id;
-  renderAll();
+  renderSidebar();
   const post = S.posts.find(p => p.id === id);
   if (!post) return;
   hide('d-empty');
@@ -533,18 +700,39 @@ function select(id) {
   const tc = colorMap[post.color] || 'tg';
   el.innerHTML = `
     ${post.img
-      ? `<div class="d-img"><img src="${esc(post.img)}" onerror="this.parentNode.innerHTML='<span style=font-size:28px;color:var(--border2)>◻</span>'"></div>`
-      : `<div class="d-img" style="border-style:dashed"><span style="font-size:28px;color:var(--border2)">◻</span></div>`}
+      ? `<div class="d-img"><img src="${esc(post.img)}" onerror="this.parentNode.innerHTML='<span style=font-size:24px;color:var(--border2)>◻</span>'"></div>`
+      : `<div class="d-img" style="border-style:dashed"><span style="font-size:24px;color:var(--border2)">◻</span></div>`}
     <div class="d-name">${esc(post.title)}</div>
-    <div class="d-date">${post.date ? fmtDate(post.date) : 'No date set'}</div>
-    ${post.status ? `<span class="d-tag ${tc}">${esc(post.status)}</span>` : ''}
-    ${post.format ? `<span class="d-tag tg">${esc(post.format)}</span>` : ''}
-    ${post.img ? `<div class="d-sec">Image URL</div><a class="d-link" href="${esc(post.img)}" target="_blank">${esc(post.img.slice(0,55))}${post.img.length>55?'…':''}</a>` : ''}`;
+    <div class="d-date">${post.date?fmtDate(post.date):'No date set'}</div>
+    ${post.status?`<span class="d-tag ${tc}">${esc(post.status)}</span>`:''}
+    ${post.format?`<span class="d-tag tg">${esc(post.format)}</span>`:''}
+    ${post.img?`<div class="d-sec">Image URL</div><a class="d-link" href="${esc(post.img)}" target="_blank">${esc(post.img.slice(0,50))}${post.img.length>50?'…':''}</a>`:''}
+    <button class="d-btn ${post.hidden?'show-btn':'hide-btn'}" onclick="toggleHide(event,'${post.id}')">${post.hidden?'Show in grid':'Hide from grid'}</button>`;
 }
 
-// ── Reorder ───────────────────────────────────────────────────────────────────
+// ── HIDE / SHOW ───────────────────────────────────────────────────────────────
+async function toggleHide(e, id) {
+  e.stopPropagation();
+  const post = S.posts.find(p => p.id === id);
+  if (!post) return;
+  post.hidden = !post.hidden;
+  renderAll();
+  if (S.sel === id) select(id);
+  if (S.fields.hidden) {
+    try {
+      await notion('/pages/' + id, 'PATCH', { properties:{ [S.fields.hidden]:{ checkbox: post.hidden } } });
+      toast(post.hidden ? 'Hidden from grid ✓' : 'Visible in grid ✓');
+    } catch(e) {
+      toast('Could not sync visibility: ' + e.message);
+    }
+  } else {
+    toast(post.hidden ? 'Hidden locally. Add a Checkbox "Hide from Grid" to sync to Notion.' : 'Visible again.');
+  }
+}
+
+// ── DRAG REORDER ──────────────────────────────────────────────────────────────
 async function reorder(from, to) {
-  if (from === to || from == null) return;
+  if (from === to || from == null || to == null) return;
   const arr = [...S.posts];
   const [moved] = arr.splice(from, 1);
   arr.splice(to, 0, moved);
@@ -554,24 +742,104 @@ async function reorder(from, to) {
     loading(true);
     try {
       await Promise.all(S.posts.map((p,i) =>
-        notion(`/pages/${p.id}`, 'PATCH', { properties:{ [S.fields.order]:{ number: i+1 } } })
+        notion('/pages/'+p.id, 'PATCH', { properties:{ [S.fields.order]:{ number: i+1 } } })
       ));
       loading(false);
       toast('Order saved to Notion ✓');
     } catch(e) {
       loading(false);
-      toast(`Could not save order: ${e.message}`);
+      toast('Could not save order: ' + e.message);
     }
   } else {
-    toast('Reordered. Add a Number property "Grid Order" to sync order back to Notion.');
+    toast('Reordered. Add a Number property "Grid Order" to sync to Notion.');
   }
 }
 
-// ── Utils ─────────────────────────────────────────────────────────────────────
-function loading(on) { document.getElementById('loading').style.display = on ? 'flex' : 'none'; }
+// ── LIGHTBOX ──────────────────────────────────────────────────────────────────
+let _lbPosts = [];
+function openLb(idx, posts) {
+  _lbPosts = posts;
+  setLb(idx);
+  document.getElementById('lightbox').classList.add('on');
+}
+function setLb(idx) {
+  S.lbIdx = idx;
+  const post = _lbPosts[idx];
+  if (!post) return;
+  document.getElementById('lb-img').src = post.img || '';
+  document.getElementById('lb-title').textContent = post.title;
+  document.getElementById('lb-date').textContent = post.date ? fmtDate(post.date) : '';
+}
+function lbNav(dir) { const n = (S.lbIdx + dir + _lbPosts.length) % _lbPosts.length; setLb(n); }
+function closeLb() { document.getElementById('lightbox').classList.remove('on'); }
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeLb(); if (e.key==='ArrowLeft') lbNav(-1); if (e.key==='ArrowRight') lbNav(1); });
+document.getElementById('lightbox').onclick = e => { if (e.target === document.getElementById('lightbox')) closeLb(); };
+
+// ── PROFILE ───────────────────────────────────────────────────────────────────
+function renderProfile() {
+  const pr = S.profile;
+  const un = pr.username || (S.dbName ? '@' + S.dbName.toLowerCase().replace(/\s+/g,'_') : '@youraccount');
+  document.getElementById('ig-un').textContent = un;
+  document.getElementById('ig-bio').textContent = pr.bio || '';
+  const avEl = document.getElementById('ig-av');
+  const letter = document.getElementById('ig-av-letter');
+  if (pr.avatar) {
+    letter.innerHTML = `<img src="${esc(pr.avatar)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.remove()">`;
+  } else {
+    letter.textContent = un.replace('@','')[0]?.toUpperCase() || 'S';
+  }
+  const linksEl = document.getElementById('ig-links');
+  linksEl.innerHTML = '';
+  if (pr.link) {
+    const chip = document.createElement('div');
+    chip.className = 'ig-link-chip';
+    chip.textContent = pr.link.replace(/^https?:\/\//,'').split('/')[0];
+    chip.onclick = () => window.open(pr.link,'_blank');
+    linksEl.appendChild(chip);
+  }
+  const add = document.createElement('div');
+  add.className = 'ig-link-chip ig-link-add';
+  add.textContent = '+ Edit profile';
+  add.onclick = () => openModal('profile-modal');
+  linksEl.appendChild(add);
+}
+
+function openModal(id) {
+  if (id === 'profile-modal') {
+    document.getElementById('pm-username').value = S.profile.username || '';
+    document.getElementById('pm-avatar').value   = S.profile.avatar   || '';
+    document.getElementById('pm-bio').value      = S.profile.bio      || '';
+    document.getElementById('pm-link').value     = S.profile.link     || '';
+  }
+  document.getElementById(id).classList.add('on');
+}
+function closeModal(id) { document.getElementById(id).classList.remove('on'); }
+
+function saveProfile() {
+  S.profile = {
+    username: document.getElementById('pm-username').value.trim(),
+    avatar:   document.getElementById('pm-avatar').value.trim(),
+    bio:      document.getElementById('pm-bio').value.trim(),
+    link:     document.getElementById('pm-link').value.trim(),
+  };
+  persist();
+  renderProfile();
+  closeModal('profile-modal');
+}
+
+// ── IG INNER TABS ─────────────────────────────────────────────────────────────
+document.querySelectorAll('.ig-tab').forEach(t => {
+  t.onclick = () => {
+    document.querySelectorAll('.ig-tab').forEach(x => x.classList.remove('on'));
+    t.classList.add('on');
+  };
+});
+
+// ── UTILS ─────────────────────────────────────────────────────────────────────
+function loading(on) { document.getElementById('loading').style.display = on?'flex':'none'; }
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function fmtDate(d) { return new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); }
-function showErr(id, msg) { const e=document.getElementById(id); e.textContent=msg; e.style.display='block'; }
+function showErr(id,msg) { const e=document.getElementById(id); e.textContent=msg; e.style.display='block'; }
 let _tt; function toast(msg) { const e=document.getElementById('toast'); e.textContent=msg; e.classList.add('on'); clearTimeout(_tt); _tt=setTimeout(()=>e.classList.remove('on'),3200); }
 </script>
 </body>
